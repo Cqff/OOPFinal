@@ -1,6 +1,7 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -92,10 +93,12 @@ public class Login extends javax.swing.JFrame {
 		// NOI18N
 		try {
 			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/src/p3.jpeg"));
+			//要自行更改
 			jLabel_BG.setIcon(new ImageIcon(image));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	
 
 		jPanel1.add(jLabel_BG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 430));
 
@@ -194,6 +197,8 @@ public class Login extends javax.swing.JFrame {
 			}
 		});
 	}
+	
+	
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JLabel JuserID;
