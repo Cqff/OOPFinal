@@ -2,7 +2,7 @@
 public class Buy extends javax.swing.JFrame {
 
     /**
-     * Creates new form Buy
+     * Creates new form Buy_Book
      */
     public Buy() {
         initComponents();
@@ -19,26 +19,26 @@ public class Buy extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane2 = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel_Photo = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jTextA_BkSitua = new javax.swing.JTextArea();
+        jLabel_Name = new javax.swing.JLabel();
+        jLabel_Author = new javax.swing.JLabel();
+        jLabel_BkSitua = new javax.swing.JLabel();
+        jLabel_View = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
-        jLabel6 = new javax.swing.JLabel();
+        jTextA_View = new javax.swing.JTextArea();
+        jLabel_Time = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
+        jTextF_Author = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea7 = new javax.swing.JTextArea();
+        jTextF_Time = new javax.swing.JTextArea();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTextArea8 = new javax.swing.JTextArea();
-        jLabel7 = new javax.swing.JLabel();
+        jTextF_Price = new javax.swing.JTextArea();
+        jLabel_Price = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea9 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jTextF_Name = new javax.swing.JTextArea();
+        jButt_Collect = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Book Detail");
@@ -47,119 +47,119 @@ public class Buy extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jDesktopPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane2.setLayer(jLabel_Photo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
         jDesktopPane2.setLayout(jDesktopPane2Layout);
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jLabel_Photo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jLabel_Photo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         jPanel1.add(jDesktopPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 400, 400));
 
         jScrollPane4.setBorder(null);
 
-        jTextArea3.setEditable(false);
-        jTextArea3.setBackground(new java.awt.Color(179, 223, 245));
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jTextArea3.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jScrollPane4.setViewportView(jTextArea3);
+        jTextA_BkSitua.setEditable(false);
+        jTextA_BkSitua.setBackground(new java.awt.Color(179, 223, 245));
+        jTextA_BkSitua.setColumns(20);
+        jTextA_BkSitua.setRows(5);
+        jTextA_BkSitua.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        jScrollPane4.setViewportView(jTextA_BkSitua);
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, 310, 120));
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
-        jLabel2.setText("書名");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, 30));
+        jLabel_Name.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
+        jLabel_Name.setText("書名");
+        jPanel1.add(jLabel_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, 30));
 
-        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
-        jLabel3.setText("作者/出版社");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 130, 50));
+        jLabel_Author.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
+        jLabel_Author.setText("作者/出版社");
+        jPanel1.add(jLabel_Author, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 130, 50));
 
-        jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
-        jLabel4.setText("書況");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, -1, -1));
+        jLabel_BkSitua.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
+        jLabel_BkSitua.setText("書況");
+        jPanel1.add(jLabel_BkSitua, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
-        jLabel5.setText("簡介");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, -1, -1));
+        jLabel_View.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
+        jLabel_View.setText("簡介");
+        jPanel1.add(jLabel_View, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, -1, -1));
 
         jScrollPane1.setBorder(null);
 
-        jTextArea4.setEditable(false);
-        jTextArea4.setBackground(new java.awt.Color(179, 223, 245));
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane1.setViewportView(jTextArea4);
+        jTextA_View.setEditable(false);
+        jTextA_View.setBackground(new java.awt.Color(179, 223, 245));
+        jTextA_View.setColumns(20);
+        jTextA_View.setRows(5);
+        jScrollPane1.setViewportView(jTextA_View);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 310, 120));
 
-        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
-        jLabel6.setText("交易時間");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, -1, -1));
+        jLabel_Time.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
+        jLabel_Time.setText("交易時間");
+        jPanel1.add(jLabel_Time, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 500, -1, -1));
 
         jScrollPane6.setBorder(null);
 
-        jTextArea6.setEditable(false);
-        jTextArea6.setBackground(new java.awt.Color(179, 223, 245));
-        jTextArea6.setColumns(30);
-        jTextArea6.setLineWrap(true);
-        jTextArea6.setRows(1);
-        jScrollPane6.setViewportView(jTextArea6);
+        jTextF_Author.setEditable(false);
+        jTextF_Author.setBackground(new java.awt.Color(179, 223, 245));
+        jTextF_Author.setColumns(30);
+        jTextF_Author.setLineWrap(true);
+        jTextF_Author.setRows(1);
+        jScrollPane6.setViewportView(jTextF_Author);
 
         jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 170, 310, 40));
 
         jScrollPane7.setBorder(null);
 
-        jTextArea7.setEditable(false);
-        jTextArea7.setBackground(new java.awt.Color(179, 223, 245));
-        jTextArea7.setColumns(30);
-        jTextArea7.setLineWrap(true);
-        jTextArea7.setRows(1);
-        jScrollPane7.setViewportView(jTextArea7);
+        jTextF_Time.setEditable(false);
+        jTextF_Time.setBackground(new java.awt.Color(179, 223, 245));
+        jTextF_Time.setColumns(30);
+        jTextF_Time.setLineWrap(true);
+        jTextF_Time.setRows(1);
+        jScrollPane7.setViewportView(jTextF_Time);
 
         jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 490, 310, 40));
 
         jScrollPane8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jTextArea8.setEditable(false);
-        jTextArea8.setBackground(new java.awt.Color(179, 223, 245));
-        jTextArea8.setColumns(30);
-        jTextArea8.setLineWrap(true);
-        jTextArea8.setRows(1);
-        jScrollPane8.setViewportView(jTextArea8);
+        jTextF_Price.setEditable(false);
+        jTextF_Price.setBackground(new java.awt.Color(179, 223, 245));
+        jTextF_Price.setColumns(30);
+        jTextF_Price.setLineWrap(true);
+        jTextF_Price.setRows(1);
+        jScrollPane8.setViewportView(jTextF_Price);
 
         jPanel1.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 310, 30));
 
-        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
-        jLabel7.setText("價格");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
+        jLabel_Price.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
+        jLabel_Price.setText("價格");
+        jPanel1.add(jLabel_Price, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
 
         jScrollPane9.setBorder(null);
 
-        jTextArea9.setEditable(false);
-        jTextArea9.setBackground(new java.awt.Color(179, 223, 245));
-        jTextArea9.setColumns(30);
-        jTextArea9.setLineWrap(true);
-        jTextArea9.setRows(1);
-        jScrollPane9.setViewportView(jTextArea9);
+        jTextF_Name.setEditable(false);
+        jTextF_Name.setBackground(new java.awt.Color(179, 223, 245));
+        jTextF_Name.setColumns(30);
+        jTextF_Name.setLineWrap(true);
+        jTextF_Name.setRows(1);
+        jScrollPane9.setViewportView(jTextF_Name);
 
         jPanel1.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 310, 40));
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 255));
-        jButton1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        jButton1.setText("收藏");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButt_Collect.setBackground(new java.awt.Color(204, 255, 255));
+        jButt_Collect.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jButt_Collect.setText("收藏");
+        jButt_Collect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButt_CollectActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
+        jPanel1.add(jButt_Collect, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,9 +176,9 @@ public class Buy extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButt_CollectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_CollectActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButt_CollectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,15 +216,15 @@ public class Buy extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButt_Collect;
     private javax.swing.JDesktopPane jDesktopPane2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel_Author;
+    private javax.swing.JLabel jLabel_BkSitua;
+    private javax.swing.JLabel jLabel_Name;
+    private javax.swing.JLabel jLabel_Photo;
+    private javax.swing.JLabel jLabel_Price;
+    private javax.swing.JLabel jLabel_Time;
+    private javax.swing.JLabel jLabel_View;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
@@ -232,11 +232,11 @@ public class Buy extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea6;
-    private javax.swing.JTextArea jTextArea7;
-    private javax.swing.JTextArea jTextArea8;
-    private javax.swing.JTextArea jTextArea9;
+    private javax.swing.JTextArea jTextA_BkSitua;
+    private javax.swing.JTextArea jTextA_View;
+    private javax.swing.JTextArea jTextF_Author;
+    private javax.swing.JTextArea jTextF_Name;
+    private javax.swing.JTextArea jTextF_Price;
+    private javax.swing.JTextArea jTextF_Time;
     // End of variables declaration//GEN-END:variables
 }

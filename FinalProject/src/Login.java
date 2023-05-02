@@ -92,7 +92,7 @@ public class Login extends javax.swing.JFrame {
 		// javax.swing.ImageIcon(getClass().getResource("/resources/p3.jpeg"))); //
 		// NOI18N
 		try {
-			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/src/p3.jpeg"));
+			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/image/p3.jpeg"));
 			//要自行更改
 			jLabel_BG.setIcon(new ImageIcon(image));
 		} catch (IOException e) {

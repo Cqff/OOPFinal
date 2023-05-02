@@ -2,6 +2,10 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -140,12 +144,42 @@ public class Register extends javax.swing.JFrame {
 		// l_BG.setIcon(new
 		// javax.swing.ImageIcon(getClass().getResource("/finalproject/p1.jpeg"))); //
 		// NOI18N
+//		try {
+//			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/image/p1.jpeg"));
+//			l_BG.setIcon(new ImageIcon(image));
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		
+		String imageUrl = "https://raw.githubusercontent.com/Cqff/OOPFinal/blob/50ee750d22ada3f6dc6d4e239ac0cf143846588d/FinalProject/image/p1.jpeg";
+		URL url;
 		try {
-			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/src/p1.jpeg"));
-			l_BG.setIcon(new ImageIcon(image));
+			url = new URL(imageUrl);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("Authorization", "Token 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");
+			connection.setRequestProperty("User-Agent", "Cqff");
+
+			int responseCode = connection.getResponseCode();
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+			    // Read the image data from the input stream
+			    InputStream inputStream = connection.getInputStream();
+			    BufferedImage image = ImageIO.read(inputStream);
+			    l_BG.setIcon(new ImageIcon(image));
+			   
+			} else {
+			    // Handle the error
+			    // ...
+			}
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+
+		
+		
+		
 		jPanel1.add(l_BG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 640));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
