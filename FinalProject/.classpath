@@ -12,10 +12,5 @@
 	<classpathentry kind="lib" path="/Users/bc/Documents/jdbc/database connection driver/sqljdbc_9.2/cht/mssql-jdbc-9.2.1.jre11.jar"/>
 	<classpathentry kind="lib" path="/Users/bc/Documents/jdbc/database connection driver/sqljdbc_9.2/cht/mssql-jdbc-9.2.1.jre15.jar"/>
 	<classpathentry kind="lib" path="/Users/bc/Documents/jdbc/database connection driver/mysql-connector-java-8.0.23/mysql-connector-java-8.0.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Chu_1/Downloads/AbsoluteLayout-RELEASE170.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Chu_1/Downloads/mysql-connector-c++-8.0.32-winx64.zip"/>
-	<classpathentry kind="lib" path="C:/Users/Chu_1/Desktop/database connection driver/sqljdbc_9.2/cht/mssql-jdbc-9.2.1.jre8.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Chu_1/Desktop/database connection driver/sqljdbc_9.2/cht/mssql-jdbc-9.2.1.jre11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Chu_1/Desktop/database connection driver/sqljdbc_9.2/cht/mssql-jdbc-9.2.1.jre15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

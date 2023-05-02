@@ -1,9 +1,27 @@
+import java.awt.Image;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
 
 public class SellB extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Sell_Book
-     */
+	File f = null;
+	String path = null;
+	private ImageIcon format = null;
+	int s = 0;
+	byte[] pimage = null;
+	
+	PreparedStatement ps;
+	Connection connection;
+	
     public SellB() {
         initComponents();
     }
@@ -19,7 +37,6 @@ public class SellB extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jLabel_Photo = new javax.swing.JLabel();
         jLabel_Price = new javax.swing.JLabel();
         jLabel_Name = new javax.swing.JLabel();
         jCB_Note = new javax.swing.JCheckBox();
@@ -166,109 +183,112 @@ public class SellB extends javax.swing.JFrame {
         });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextF_Time)
-                            .addComponent(jLabel_View)
-                            .addComponent(jLabel_BkSitua)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jScrollPane2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel_Price)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextF_Price, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCB_Book)
-                                .addGap(48, 48, 48)
-                                .addComponent(jCB_Note))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel_Class)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCB_Major, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel_Author)
-                            .addComponent(jButt_Submit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextF_Author))
-                        .addGap(144, 144, 144)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel_UploadB, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                                .addComponent(jButt_Upload))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel_Upload)
-                                .addGap(312, 312, 312))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel_Name)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextF_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel_Time))
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(443, 443, 443))
+        	jPanel1Layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(34)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(jTextF_Time)
+        						.addComponent(jLabel_View)
+        						.addComponent(jLabel_BkSitua)
+        						.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(jPanel1Layout.createSequentialGroup()
+        							.addComponent(jLabel_Price)
+        							.addPreferredGap(ComponentPlacement.UNRELATED)
+        							.addComponent(jTextF_Price, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(jPanel1Layout.createSequentialGroup()
+        							.addComponent(jCB_Book)
+        							.addGap(48)
+        							.addComponent(jCB_Note))
+        						.addGroup(jPanel1Layout.createSequentialGroup()
+        							.addComponent(jLabel_Class)
+        							.addGap(18)
+        							.addComponent(jCB_Major, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
+        						.addComponent(jLabel_Author)
+        						.addComponent(jButt_Submit, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jTextF_Author))
+        					.addGap(144)
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        						.addGroup(jPanel1Layout.createSequentialGroup()
+        							.addComponent(jDesktopPane1, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+        							.addGap(6))
+        						.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
+        							.addGroup(jPanel1Layout.createSequentialGroup()
+        								.addComponent(jLabel_UploadB, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE)
+        								.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+        								.addComponent(jButt_Upload))
+        							.addGroup(jPanel1Layout.createSequentialGroup()
+        								.addComponent(jLabel_Upload)
+        								.addGap(312)))))
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addComponent(jLabel_Name)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(jTextF_Name, GroupLayout.PREFERRED_SIZE, 282, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(jLabel_Time))
+        			.addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        			.addGap(443))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_Upload)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_UploadB, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButt_Upload))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(141, 141, 141))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Name)
-                    .addComponent(jTextF_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Price)
-                    .addComponent(jTextF_Price, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCB_Note)
-                    .addComponent(jCB_Book))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_Class)
-                    .addComponent(jCB_Major, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel_Author)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextF_Author, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel_BkSitua)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel_View)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel_Time)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextF_Time, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jButt_Submit)
-                .addContainerGap(62, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jPanel1Layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE))
+        				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        					.addComponent(jLabel_Upload)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(jDesktopPane1, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+        					.addGap(1)
+        					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(jLabel_UploadB, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(jButt_Upload))
+        					.addGap(497)))
+        			.addGap(141))
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(56)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel_Name)
+        				.addComponent(jTextF_Name, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel_Price)
+        				.addComponent(jTextF_Price, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(jCB_Note)
+        				.addComponent(jCB_Book))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jLabel_Class)
+        				.addComponent(jCB_Major, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jLabel_Author)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jTextF_Author, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jLabel_BkSitua)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jScrollPane2, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jLabel_View)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(jLabel_Time)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(jTextF_Time, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        			.addGap(26)
+        			.addComponent(jButt_Submit)
+        			.addContainerGap(307, Short.MAX_VALUE))
         );
+        
+        JLabel jLabel_Photo = new JLabel("");
+        jLabel_Photo.setBounds(0, 0, 414, 302);
+        jPanel1.setLayout(jPanel1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -299,6 +319,19 @@ public class SellB extends javax.swing.JFrame {
 
     private void jButt_UploadActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
+    	JFileChooser fileC = new JFileChooser();
+		FileNameExtensionFilter fnwf = new FileNameExtensionFilter("JPG PNG AND JPEG", "png", "jpeg", "jpg");
+		fileC.addChoosableFileFilter(fnwf);
+		int load = fileC.showOpenDialog(null);
+
+		if (load == fileC.APPROVE_OPTION) {
+			f = fileC.getSelectedFile();
+			path = f.getAbsolutePath();
+			jLabel_UploadB.setText(path);
+			ImageIcon i = new ImageIcon(path);
+			Image img = i.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+			jLabel_Photo.setIcon(new ImageIcon(img));
+		}
     }                                            
 
     private void jButt_SubmitActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -324,7 +357,7 @@ public class SellB extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -368,7 +401,6 @@ public class SellB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_BkSitua;
     private javax.swing.JLabel jLabel_Class;
     private javax.swing.JLabel jLabel_Name;
-    private javax.swing.JLabel jLabel_Photo;
     private javax.swing.JLabel jLabel_Price;
     private javax.swing.JLabel jLabel_Time;
     private javax.swing.JLabel jLabel_Upload;
@@ -383,5 +415,5 @@ public class SellB extends javax.swing.JFrame {
     private javax.swing.JTextField jTextF_Name;
     private javax.swing.JTextField jTextF_Price;
     private javax.swing.JTextField jTextF_Time;
-    // End of variables declaration                   
+    private javax.swing.JLabel jLabel_Photo;
 }
