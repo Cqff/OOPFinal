@@ -11,11 +11,11 @@ public class MySQL {
 //	public  static Connection connectSQL() {
 //		Connection connection = null;
 //		try {
-////			Class.forName("com.mysql.jdbc.Driver");
+//			Class.forName("com.mysql.jdbc.Driver");
 //			connection = DriverManager.getConnection(DB_URL, USER, PASS);
 //			System.out.println("Load Database!");
-////		} catch (ClassNotFoundException e) {
-////			Logger.getLogger(MySql.class.getName()).log(Level.SEVERE, null, e);
+//		} catch (ClassNotFoundException e) {
+//			Logger.getLogger(MySql.class.getName()).log(Level.SEVERE, null, e);
 //		} catch (SQLException e) {
 //			Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, e);
 //		}
@@ -23,11 +23,25 @@ public class MySQL {
 //		return connection;
 //	}
 	
+//	public static Connection connectSQL() {
+//		Connection connection = null;
+//		try {
+//			Class.forName("com.mysql.jdbc.Driver");
+//			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "BC", "");
+//			System.out.println("Load Database!");
+//		} catch (ClassNotFoundException e) {
+//			Logger.getLogger(MySql.class.getName()).log(Level.SEVERE, null, e);
+//		} catch (SQLException e) {
+//			Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, e);
+//		}
+//		return connection;
+//	}
+	
 	public static Connection connectSQL() {
 		Connection connection = null;
 		try {
 //			Class.forName("com.mysql.jdbc.Driver");
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project", "BC", "");
+			connection = DriverManager.getConnection("jdbc:mysql://140.119.126.54:3333/finalProject", "BC", "");
 			System.out.println("Load Database!");
 //		} catch (ClassNotFoundException e) {
 //			Logger.getLogger(MySql.class.getName()).log(Level.SEVERE, null, e);
