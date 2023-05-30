@@ -50,14 +50,9 @@ public class HomePage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnSell = new JButton("賣書");
-		btnSell.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
-		btnSell.setBounds(616, 11, 160, 40);
-		contentPane.add(btnSell);
-		
 		JButton btnFavorite = new JButton("收藏");
 		btnFavorite.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
-		btnFavorite.setBounds(10, 435, 160, 40);
+		btnFavorite.setBounds(616, 11, 160, 40);
 		contentPane.add(btnFavorite);
 		
 		JButton btnProfile = new JButton("我的主頁");
@@ -110,7 +105,11 @@ public class HomePage extends JFrame {
 		});
 		btnEN.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
 		btnEN.setBounds(80, 251, 123, 33);
-		contentPane.add(btnEN);	
+		contentPane.add(btnEN);
+		
+
+		
+		
 	}
 }
 
