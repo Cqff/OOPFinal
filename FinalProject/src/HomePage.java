@@ -70,26 +70,16 @@ public class HomePage extends JFrame {
 		btnService.setBounds(616, 435, 160, 40);
 		contentPane.add(btnService);
 		
-		JLabel lbNewReleaseSB = new JLabel("最新二手書:");
-		lbNewReleaseSB.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
-		lbNewReleaseSB.setBounds(111, 72, 108, 26);
-		contentPane.add(lbNewReleaseSB);
-		
-		JLabel lbNewReleaseSB_1 = new JLabel("最新電子筆記:");
-		lbNewReleaseSB_1.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
-		lbNewReleaseSB_1.setBounds(111, 244, 128, 26);
-		contentPane.add(lbNewReleaseSB_1);
-		
 		JButton btnNewBook1 = new JButton("Book_1");
-		btnNewBook1.setBounds(150, 109, 89, 99);
+		btnNewBook1.setBounds(150, 123, 89, 99);
 		contentPane.add(btnNewBook1);
 		
 		JButton btnNewBook2 = new JButton("Book_2");
-		btnNewBook2.setBounds(350, 109, 89, 99);
+		btnNewBook2.setBounds(350, 123, 89, 99);
 		contentPane.add(btnNewBook2);
 		
 		JButton btnNewBook3 = new JButton("Book_3");
-		btnNewBook3.setBounds(558, 109, 89, 99);
+		btnNewBook3.setBounds(558, 123, 89, 99);
 		contentPane.add(btnNewBook3);
 		
 		JButton btnNewNote1 = new JButton("Note_1");
@@ -108,10 +98,19 @@ public class HomePage extends JFrame {
 		btnNewNote3.setBounds(558, 295, 89, 99);
 		contentPane.add(btnNewNote3);
 		
-
+		JButton btnSB = new JButton("二手書：");
+		btnSB.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
+		btnSB.setBounds(80, 79, 123, 33);
+		contentPane.add(btnSB);
 		
-		
+		JButton btnEN = new JButton("電子筆記：");
+		btnEN.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnEN.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
+		btnEN.setBounds(80, 251, 123, 33);
+		contentPane.add(btnEN);	
 	}
 }
-
 
