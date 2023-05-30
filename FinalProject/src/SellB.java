@@ -1,7 +1,17 @@
+
 import java.awt.Image;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -10,6 +20,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import java.sql.DriverManager;
 
 public class SellB extends javax.swing.JFrame {
 
@@ -18,12 +29,15 @@ public class SellB extends javax.swing.JFrame {
 	private ImageIcon format = null;
 	int s = 0;
 	byte[] pimage = null;
-	
+	boolean isNoteSelected;
+	boolean isBookSelected;
+
 	PreparedStatement ps;
 	Connection connection;
 	
-    public SellB() {
+	public SellB(Connection connection) {
         initComponents();
+        this.connection = connection;
     }
 
     /**
@@ -60,25 +74,23 @@ public class SellB extends javax.swing.JFrame {
         jTextA_BkSitua = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jTextF_Author = new javax.swing.JTextField();
+        jLabel_Photo = new javax.swing.JLabel();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-//        jPanel1.setBackground(new java.awt.Color(107, 213, 229));
-//
-//        jDesktopPane1.setPreferredSize(new java.awt.Dimension(400, 400));
-//
-//        jDesktopPane1.setLayer(jLabel_Photo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-//
-//        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-//        jDesktopPane1.setLayout(jDesktopPane1Layout);
-//        jDesktopPane1Layout.setHorizontalGroup(
-//            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addComponent(jLabel_Photo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-//        );
-//        jDesktopPane1Layout.setVerticalGroup(
-//            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-//            .addComponent(jLabel_Photo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-//        );
+        jDesktopPane1.setLayer(jLabel_Photo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+       jDesktopPane1.setLayout(jDesktopPane1Layout);
+       jDesktopPane1Layout.setHorizontalGroup(
+           jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel_Photo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+       );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel_Photo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+       );
 
         jLabel_Price.setFont(new java.awt.Font("Helvetica Neue", 0, 22)); // NOI18N
         jLabel_Price.setText("價格");
@@ -140,7 +152,12 @@ public class SellB extends javax.swing.JFrame {
         jButt_Submit.setText("繳交");
         jButt_Submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButt_SubmitActionPerformed(evt);
+                try {
+					jButt_SubmitActionPerformed(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -165,12 +182,12 @@ public class SellB extends javax.swing.JFrame {
             }
         });
 
-        jTextA_View.setColumns(20);
+        jTextA_View.setColumns(30);
         jTextA_View.setRows(5);
         jTextA_View.setTabSize(10);
         jScrollPane1.setViewportView(jTextA_View);
 
-        jTextA_BkSitua.setColumns(20);
+        jTextA_BkSitua.setColumns(30);
         jTextA_BkSitua.setRows(5);
         jTextA_BkSitua.setTabSize(10);
         jScrollPane2.setViewportView(jTextA_BkSitua);
@@ -286,7 +303,7 @@ public class SellB extends javax.swing.JFrame {
         			.addContainerGap(307, Short.MAX_VALUE))
         );
         
-        JLabel jLabel_Photo = new JLabel("");
+        
         jLabel_Photo.setBounds(0, 0, 414, 302);
         jPanel1.setLayout(jPanel1Layout);
 
@@ -310,33 +327,80 @@ public class SellB extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void jCB_NoteActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    	isNoteSelected = jCB_Note.isSelected();
     }                                        
 
     private void jCB_BookActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+    	 isBookSelected = jCB_Book.isSelected();
     }                                        
 
-    private void jButt_UploadActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-    	JFileChooser fileC = new JFileChooser();
-		FileNameExtensionFilter fnwf = new FileNameExtensionFilter("JPG PNG AND JPEG", "png", "jpeg", "jpg");
-		fileC.addChoosableFileFilter(fnwf);
-		int load = fileC.showOpenDialog(null);
+    private void jButt_UploadActionPerformed(java.awt.event.ActionEvent evt) {
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG, PNG, and JPEG Images", "jpg", "png", "jpeg");
+        fileChooser.setFileFilter(filter);
 
-		if (load == fileC.APPROVE_OPTION) {
-			f = fileC.getSelectedFile();
-			path = f.getAbsolutePath();
-			jLabel_UploadB.setText(path);
-			ImageIcon i = new ImageIcon(path);
-			Image img = i.getImage().getScaledInstance(400, 400, Image.SCALE_SMOOTH);
-			jLabel_Photo.setIcon(new ImageIcon(img));
-		}
-    }                                            
+        int returnVal = fileChooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            f = fileChooser.getSelectedFile();
+            path = f.getAbsolutePath();
+            jLabel_UploadB.setText(path);
+            ImageIcon ii = new ImageIcon (path);
+            Image img = ii.getImage().getScaledInstance(400, 300,Image.SCALE_SMOOTH);
+            jLabel_Photo.setIcon(new ImageIcon(img));
+           // ImageIcon icon = new ImageIcon(path);
+          //  Image image = icon.getImage().getScaledInstance(jLabel_Photo.getWidth(), jLabel_Photo.getHeight(), Image.SCALE_SMOOTH);
+         //   ImageIcon scaledIcon = new ImageIcon(image);
+         //   jLabel_Photo.setIcon(scaledIcon);
+            
+            // Add the photo path to jLabel_UploadB
+          
+        }
+    }                                      
 
-    private void jButt_SubmitActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-    }                                            
+    private void jButt_SubmitActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                                             
+            // Get the user information from input fields or variables
+            String name = jTextF_Name.getText();
+            double price = Double.parseDouble(jTextF_Price.getText());
+            String type = "";
+            if (isNoteSelected) {
+            	type = jCB_Book.getText();
+            }
+            if (isBookSelected) {
+            	 type = jCB_Note.getText();
+            }
+            String category = jCB_Major.getSelectedItem().toString();
+            String author = jTextF_Author.getText();
+            String situation = jTextA_BkSitua.getText();
+            String view = jTextA_View.getText();
+            String time = jTextF_Time.getText();
+            
+            File f = new File(path);
+            String query = "INSERT INTO Sell_Book (ID,UserID,Name,Price, Type,Category,Author,Situation,View,Time,img,img_path) VALUES (DEFAULT, ?, ?,?,?,?,?,?,?,?,?,?)";
+            try {
+            	InputStream is = new FileInputStream(f);
+            	PreparedStatement ps = connection.prepareStatement(query);
+            	 ps.setInt(1, 111306055);
+                 ps.setString(2, name);
+                 ps.setDouble(3, price);
+                 ps.setString(4, type);
+                 ps.setString(5, category);
+                 ps.setString(6, author);
+                 ps.setString(7, situation);
+                 ps.setString(8, view);
+                 ps.setString(9, time);
+                 ps.setBlob(10, is);
+                 ps.setString(11, path);
+                 ps.executeUpdate();
+                 
+                 ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }  catch(FileNotFoundException ex) {
+        	Logger.getLogger(SellB.class.getName()).log(Level.SEVERE,null,ex);
+        }
+         
+    }                                         
+
 
     private void jTextF_TimeActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
@@ -353,6 +417,7 @@ public class SellB extends javax.swing.JFrame {
     private void jTextF_AuthorActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
+    
 
     /**
      * @param args the command line arguments
@@ -363,7 +428,15 @@ public class SellB extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+    	String server = "jdbc:mysql://140.119.19.73:3315/";
+		String database = "111306047"; // change to your own database
+		String url = server + database + "?useSSL=false";
+		String username = "111306047"; // change to your own username
+		String password = "sfe0e"; // change to your own password
+        //</editor-fold>
+
+        /* Create and display the form */
+		try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -379,16 +452,21 @@ public class SellB extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SellB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SellB().setVisible(true);
-            }
-        });
+		try {
+			Connection conn = DriverManager.getConnection(url, username, password);
+			System.out.println("DB Connectd");
+			 java.awt.EventQueue.invokeLater(new Runnable() {
+		            public void run() {
+		                new SellB(conn).setVisible(true);
+		            }
+		        });
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+        
     }
-
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButt_Submit;
     private javax.swing.JButton jButt_Upload;
