@@ -47,9 +47,9 @@ public class Login extends javax.swing.JFrame {
 		jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
 		JuserID.setBackground(new java.awt.Color(153, 204, 0));
-		JuserID.setFont(new java.awt.Font("Songti TC", 0, 36)); // NOI18N
+		JuserID.setFont(new java.awt.Font("Microsoft Yahei", 0, 36)); // NOI18N
 		JuserID.setForeground(new java.awt.Color(153, 51, 255));
-		JuserID.setText("  User ID: ");
+		JuserID.setText("  帳號: ");
 		jPanel1.add(JuserID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 200, 38));
 
 		textFieldID.addActionListener(new java.awt.event.ActionListener() {
@@ -61,15 +61,15 @@ public class Login extends javax.swing.JFrame {
 		jPanel1.add(jPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 230, 40));
 
 		JuserID1.setBackground(new java.awt.Color(51, 102, 255));
-		JuserID1.setFont(new java.awt.Font("Songti TC", 0, 36)); // NOI18N
+		JuserID1.setFont(new java.awt.Font("Microsoft Yahei", 0, 36)); // NOI18N
 		JuserID1.setForeground(new java.awt.Color(153, 51, 255));
-		JuserID1.setText("  Password: ");
+		JuserID1.setText("    密碼:");
 		jPanel1.add(JuserID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 38));
 
 		jButton_Register.setBackground(new java.awt.Color(204, 255, 255));
-		jButton_Register.setFont(new java.awt.Font("Kaiti TC", 0, 36)); // NOI18N
+		jButton_Register.setFont(new java.awt.Font("Microsoft Yahei", 0, 36)); // NOI18N
 		jButton_Register.setForeground(new java.awt.Color(153, 51, 255));
-		jButton_Register.setText("Register");
+		jButton_Register.setText("加入");
 		jButton_Register.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton_RegisterActionPerformed(evt);
@@ -78,9 +78,9 @@ public class Login extends javax.swing.JFrame {
 		jPanel1.add(jButton_Register, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 160, 50));
 
 		jButton_Login.setBackground(new java.awt.Color(204, 255, 255));
-		jButton_Login.setFont(new java.awt.Font("Kaiti TC", 0, 36)); // NOI18N
+		jButton_Login.setFont(new java.awt.Font("Microsoft Yahei", 0, 36)); // NOI18N
 		jButton_Login.setForeground(new java.awt.Color(153, 51, 255));
-		jButton_Login.setText("Login");
+		jButton_Login.setText("登入");
 		jButton_Login.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jButton_LoginActionPerformed(evt);
@@ -134,9 +134,9 @@ public class Login extends javax.swing.JFrame {
 		String pass = String.valueOf(jPasswordField.getPassword());
 
 		if (uid.equals("")) {
-			JOptionPane.showMessageDialog(null, "Please enter your id");
+			JOptionPane.showMessageDialog(null, "請輸入您的帳號");
 		} else if (pass.equals("")) {
-			JOptionPane.showMessageDialog(null, "Please enter your password");
+			JOptionPane.showMessageDialog(null, "請輸入你的密碼");
 		} else {
 
 			String query = "SELECT * FROM `reg_form` WHERE `r_id` = ? AND `r_pass` = ?";
@@ -149,9 +149,12 @@ public class Login extends javax.swing.JFrame {
 				rs = ps.executeQuery();
 
 				if (rs.next()) {
-					JOptionPane.showMessageDialog(null, "YES");
+					JOptionPane.showMessageDialog(null, "Login Successful");
+					home.setVisible(true);
+					home.setDefaultCloseOperation(EXIT_ON_CLOSE);
+					this.dispose();
 				} else {
-					JOptionPane.showMessageDialog(null, "NO");
+					JOptionPane.showMessageDialog(null, "User does not exists");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -210,5 +213,6 @@ public class Login extends javax.swing.JFrame {
 	private javax.swing.JPasswordField jPasswordField;
 	private javax.swing.JSpinner jSpinner1;
 	private javax.swing.JTextField textFieldID;
+	private HomePage home = new HomePage();
 	// End of variables declaration//GEN-END:variables
 }
