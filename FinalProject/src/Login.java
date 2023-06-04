@@ -201,7 +201,13 @@ public class Login extends javax.swing.JFrame {
 		});
 	}
 	
+	public void setUserID() {
+		userID = textFieldID.getText();
+	}
 	
+	public int getUserID() {
+		return Integer.parseInt(userID);
+	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JLabel JuserID;
@@ -213,6 +219,7 @@ public class Login extends javax.swing.JFrame {
 	private javax.swing.JPasswordField jPasswordField;
 	private javax.swing.JSpinner jSpinner1;
 	private javax.swing.JTextField textFieldID;
+	private String userID ;
 	private HomePage home = new HomePage();
 	// End of variables declaration//GEN-END:variables
 }
