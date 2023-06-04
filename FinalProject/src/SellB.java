@@ -343,16 +343,15 @@ public class SellB extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             f = fileChooser.getSelectedFile();
             path = f.getAbsolutePath();
-            jLabel_UploadB.setText(path);
+            
+            String commonDirectory = "/Users/raxhel/Desktop/common";
+            String relativePath = path.replace(commonDirectory, "");
+            
+            jLabel_UploadB.setText(relativePath);
             ImageIcon ii = new ImageIcon (path);
             Image img = ii.getImage().getScaledInstance(400, 300,Image.SCALE_SMOOTH);
             jLabel_Photo.setIcon(new ImageIcon(img));
-           // ImageIcon icon = new ImageIcon(path);
-          //  Image image = icon.getImage().getScaledInstance(jLabel_Photo.getWidth(), jLabel_Photo.getHeight(), Image.SCALE_SMOOTH);
-         //   ImageIcon scaledIcon = new ImageIcon(image);
-         //   jLabel_Photo.setIcon(scaledIcon);
-            
-            // Add the photo path to jLabel_UploadB
+ 
           
         }
     }                                      
@@ -362,10 +361,10 @@ public class SellB extends javax.swing.JFrame {
             String name = jTextF_Name.getText();
             double price = Double.parseDouble(jTextF_Price.getText());
             String type = "";
-            if (isNoteSelected) {
+            if (isBookSelected) {
             	type = jCB_Book.getText();
             }
-            if (isBookSelected) {
+            if (isNoteSelected) {
             	 type = jCB_Note.getText();
             }
             String category = jCB_Major.getSelectedItem().toString();
