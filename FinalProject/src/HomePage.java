@@ -94,6 +94,12 @@ public class HomePage extends JFrame {
 		contentPane.add(btnNewNote3);
 		
 		JButton btnSB = new JButton("二手書：");
+		btnSB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Second s1 = new Second();
+				s1.setVisible(true);
+			}
+		});
 		btnSB.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
 		btnSB.setBounds(80, 79, 123, 33);
 		contentPane.add(btnSB);
@@ -101,6 +107,8 @@ public class HomePage extends JFrame {
 		JButton btnEN = new JButton("電子筆記：");
 		btnEN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Enote e1 = new Enote();
+				e1.setVisible(true);
 			}
 		});
 		btnEN.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
@@ -112,4 +120,3 @@ public class HomePage extends JFrame {
 		
 	}
 }
-
