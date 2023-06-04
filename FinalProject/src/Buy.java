@@ -24,8 +24,10 @@ public class Buy extends javax.swing.JFrame {
 	 ResultSet rs;
 	 private ImageIcon format = null;
 	 byte[] pimage = null;
+	 private String id;
 
-    public Buy() {
+    public Buy(String id) {
+    	this.id = id;
         initComponents();
         showDataFromDatabase();
     }
@@ -41,7 +43,7 @@ public class Buy extends javax.swing.JFrame {
     	try {
     		conn = DriverManager.getConnection(url, username, password);
     		statement = conn.createStatement();
-    		rs = statement.executeQuery("SELECT * FROM Sell_Book");
+    		rs = statement.executeQuery("SELECT * FROM Sell_Book WHERE ID =" + id);
             
             
             while (rs.next()) {
@@ -267,15 +269,16 @@ public class Buy extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Buy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+    }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Buy().setVisible(true);
-            }
-        });
-    }
+     //   java.awt.EventQueue.invokeLater(new Runnable() {
+         //   public void run() {
+              //  new Buy().setVisible(true);
+           // }
+       // });
+  //  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButt_Collect;
