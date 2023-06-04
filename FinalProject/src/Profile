@@ -1,1 +1,143 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.*;
+
+public class Profile extends JFrame {
+
+	private JPanel contentPane;
+	private JTable table;
+	private JScrollPane scrollPane;
+	private JLabel lbName;
+	private JTextField tfID;
+	private JTextField tfName;
+	Connection conn;
+	Statement stat;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Profile frame = new Profile();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Profile() {
+		setTitle("我的主頁");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 531, 368);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 30, 416, 57);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "電子書/電子筆記", "New column"
+			}
+		));
+		
+		JLabel lbID = new JLabel("ID:");
+		lbID.setBounds(126, 231, 49, 14);
+		contentPane.add(lbID);
+		
+		lbName = new JLabel("二手書/電子筆記名稱:");
+		lbName.setBounds(126, 256, 115, 14);
+		contentPane.add(lbName);
+		
+		tfID = new JTextField();
+		tfID.setBounds(238, 228, 124, 20);
+		contentPane.add(tfID);
+		tfID.setColumns(10);
+		
+		tfName = new JTextField();
+		tfName.setColumns(10);
+		tfName.setBounds(238, 253, 124, 20);
+		contentPane.add(tfName);
+		
+		JButton btnDelete = new JButton("刪除");
+		btnDelete.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
+		btnDelete.setBounds(126, 284, 236, 36);
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String query = "";
+				String ID = tfID.getText();
+				String Name = tfName.getText();
+				
+				try {
+		                query = "DELETE FROM ?? WHERE ID='" + ID + "'";                   //database 叫什麽名字
+		                stat = conn.createStatement();
+		                stat.executeUpdate(query);
+		            
+		            // Refresh outputArea
+		            String selectQuery = "SELECT * FROM Twice";
+		            PreparedStatement statement = conn.prepareStatement(selectQuery);
+		            ResultSet result = statement.executeQuery();
+		            //outputArea.setText(showResultSet(result));
+		            
+		        } catch (SQLException e1) {
+		            e1.printStackTrace();
+		        }
+				
+			}
+		});
+
+		contentPane.add(btnDelete);
+	}
+	
+	public void checkBookExist(String name) throws BookError {
+		
+		if(username.contains(name)) return;    //if id and name don't exist
+		throw new BookError("沒有相關資料");
+	}
+	
+	class BookError extends Exception {
+		public BookError(String Error){
+			super(Error);
+		}
+	}
+	
+	public static String showResultSet(ResultSet result) throws SQLException {
+		return null;
+		
+	}
+	
+}
 
