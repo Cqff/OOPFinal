@@ -31,6 +31,7 @@ public class SellB extends javax.swing.JFrame {
 	byte[] pimage = null;
 	boolean isNoteSelected;
 	boolean isBookSelected;
+	Login login1 = new Login();
 
 	PreparedStatement ps;
 	Connection connection;
@@ -378,7 +379,7 @@ public class SellB extends javax.swing.JFrame {
             try {
             	InputStream is = new FileInputStream(f);
             	PreparedStatement ps = connection.prepareStatement(query);
-            	 ps.setInt(1, 111306055);
+            	 ps.setInt(1, login1.getUserID());
                  ps.setString(2, name);
                  ps.setDouble(3, price);
                  ps.setString(4, type);
