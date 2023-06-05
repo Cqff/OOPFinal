@@ -105,7 +105,7 @@ public class Enote extends JFrame{
 
 	    @Override
 	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	        setText("Buy"); // 按钮显示的文本
+	        setText("View"); // 按钮显示的文本
 	        return this;
 	    }
 	}
