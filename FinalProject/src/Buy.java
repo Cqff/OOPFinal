@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -101,6 +102,7 @@ public class Buy extends javax.swing.JFrame {
         jScrollPane9 = new javax.swing.JScrollPane();
         jTextF_Name = new javax.swing.JTextArea();
         jButt_Collect = new javax.swing.JButton();
+        jButt_Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Book Detail");
@@ -222,6 +224,19 @@ public class Buy extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButt_Collect, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
+        
+        jButt_Back.setBackground(new java.awt.Color(204, 255, 255));
+        jButt_Back.setText("返回");
+        //jButt_Back.setBounds(600, 510, 120, 40);
+        jPanel1.add(jButt_Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 520, -1, -1));
+        jButt_Back.setFont(new java.awt.Font("Helvetica Neue", 0, 24));
+        jButt_Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButt_BackActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButt_Collect, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -241,6 +256,9 @@ public class Buy extends javax.swing.JFrame {
     private void jButt_CollectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_CollectActionPerformed
    
     	}
+    private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {
+        this.dispose();
+    }
 
     //GEN-LAST:event_jButt_CollectActionPerformed
 
@@ -281,6 +299,7 @@ public class Buy extends javax.swing.JFrame {
   //  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButt_Back;
     private javax.swing.JButton jButt_Collect;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLabel_Author;
@@ -303,5 +322,6 @@ public class Buy extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextF_Name;
     private javax.swing.JTextArea jTextF_Price;
     private javax.swing.JTextArea jTextF_Time;
+   
     // End of variables declaration//GEN-END:variables
 }
