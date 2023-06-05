@@ -390,7 +390,11 @@ public class SellB extends javax.swing.JFrame {
                  ps.setString(9, time);
                  ps.setBlob(10, is);
                  ps.setString(11, path);
-                 ps.executeUpdate();
+		    
+                 if(ps.executeUpdate() > 0) {
+                	 JOptionPane.showMessageDialog(null, "Completed");
+                	 dispose();
+                 }
                  
                  ps.close();
         } catch (SQLException ex) {
