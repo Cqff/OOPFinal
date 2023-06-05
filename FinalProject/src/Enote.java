@@ -21,19 +21,40 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class Enote extends JFrame{
+public class Enote extends JFrame implements Interface{
 	private JFrame frame;
     private JTable table;
     private DefaultTableModel tableModel;
+    private javax.swing.JButton jButton_Homepage;
     
     public Enote() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("電子書");
         createTable();
-        showEbooks();
+        show();
+        button();
+    }
+    public void button() {
+   	 jButton_Homepage = new javax.swing.JButton();
+   	 jButton_Homepage.setText("返回首頁");
+   	 jButton_Homepage.setFont(new java.awt.Font("Helvetica Neue", 0, 24));
+   	 jButton_Homepage.setBounds(10, 510, 200, 40);
+   	 jButton_Homepage.addActionListener(new java.awt.event.ActionListener() {
+   		    public void actionPerformed(java.awt.event.ActionEvent evt) {
+   		        jButton_HomepageActionPerformed(evt);
+   		    }
+   		});
+
+   }
+    
+    private void jButton_HomepageActionPerformed(java.awt.event.ActionEvent evt) {
+        HomePage homepage = new HomePage();
+        homepage.setVisible(true);
+        this.dispose();
     }
 
-	private void createTable() {
+
+	public void createTable() {
         tableModel = new DefaultTableModel();
         tableModel.addColumn("no:");
         tableModel.addColumn("書名");
@@ -47,7 +68,7 @@ public class Enote extends JFrame{
         
     }
 	
-	private void showEbooks() {
+	public void show() {
         ArrayList<Goods> ebookData = getBooksFromDatabase();
         for (Goods goods : ebookData) {
             Object[] row = {goods.getID(), goods.getName(), goods.getPrice(),goods.getAuthor()};
@@ -57,7 +78,7 @@ public class Enote extends JFrame{
         setVisible(true);
 	}
 	
-	 private ArrayList<Goods> getBooksFromDatabase() {
+	 public ArrayList<Goods> getBooksFromDatabase() {
          ArrayList<Goods> eNote = new ArrayList<>();
          String server = "jdbc:mysql://140.119.19.73:3315/";
  		String database = "111306047"; // change to your own database
@@ -105,7 +126,7 @@ public class Enote extends JFrame{
 
 	    @Override
 	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	        setText("View"); // 按钮显示的文本
+	        setText("Buy"); // 按钮显示的文本
 	        return this;
 	    }
 	}
