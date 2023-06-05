@@ -1,20 +1,15 @@
+import java.awt.Dimension;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
@@ -22,11 +17,11 @@ import java.sql.*;
 public class Profile extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
-	private JScrollPane scrollPane;
-	private JLabel lbName;
+	//private JScrollPane scrollPane;
 	private JTextField tfID;
-	private JTextField tfName;
+	private DefaultTableModel tableModel;
+	private JTable table;
+	private ArrayList<Goods> ebooksData;
 	Connection conn;
 	Statement stat;
 
@@ -52,92 +47,133 @@ public class Profile extends JFrame {
 	public Profile() {
 		setTitle("我的主頁");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 531, 368);
+		
+		setBounds(100, 100, 725, 397);
 		contentPane = new JPanel();
+		contentPane.setSize(1000, 500);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 30, 416, 57);
-		contentPane.add(scrollPane);
+		createDeleteFunction();
+		createTable();
+		showUserSBookEnote();
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "電子書/電子筆記", "New column"
-			}
-		));
-		
-		JLabel lbID = new JLabel("ID:");
-		lbID.setBounds(126, 231, 49, 14);
-		contentPane.add(lbID);
-		
-		lbName = new JLabel("二手書/電子筆記名稱:");
-		lbName.setBounds(126, 256, 115, 14);
-		contentPane.add(lbName);
-		
-		tfID = new JTextField();
-		tfID.setBounds(238, 228, 124, 20);
-		contentPane.add(tfID);
-		tfID.setColumns(10);
-		
-		tfName = new JTextField();
-		tfName.setColumns(10);
-		tfName.setBounds(238, 253, 124, 20);
-		contentPane.add(tfName);
-		
-		JButton btnDelete = new JButton("刪除");
-		btnDelete.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
-		btnDelete.setBounds(126, 284, 236, 36);
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				String query = "";
-				String ID = tfID.getText();
-				String Name = tfName.getText();
-				
-				try {
-		                query = "DELETE FROM ?? WHERE ID='" + ID + "'";                   //database 叫什麽名字
-		                stat = conn.createStatement();
-		                stat.executeUpdate(query);
-		            
-		            // Refresh outputArea
-		            String selectQuery = "SELECT * FROM Twice";
-		            PreparedStatement statement = conn.prepareStatement(selectQuery);
-		            ResultSet result = statement.executeQuery();
-		            //outputArea.setText(showResultSet(result));
-		            
-		        } catch (SQLException e1) {
-		            e1.printStackTrace();
-		        }
-				
-			}
-		});
-
-		contentPane.add(btnDelete);
 	}
-	
-	public void checkBookExist(String name) throws BookError {
 		
-		if(username.contains(name)) return;    //if id and name don't exist
-		throw new BookError("沒有相關資料");
-	}
-	
-	class BookError extends Exception {
-		public BookError(String Error){
-			super(Error);
+		private void createDeleteFunction() {
+			
+			JLabel lbID = new JLabel("ID:");
+			lbID.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lbID.setBounds(296, 268, 49, 14);
+			contentPane.add(lbID);
+			
+			tfID = new JTextField();
+			tfID.setBounds(324, 265, 96, 20);
+			contentPane.add(tfID);
+			tfID.setColumns(10);
+			
+			JLabel lbNewLabel = new JLabel("你上架的二手課本和電子筆記：");
+			lbNewLabel.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
+			lbNewLabel.setBounds(10, 11, 215, 20);
+			contentPane.add(lbNewLabel);
+			
+			JButton btnDelete = new JButton("下架");
+			btnDelete.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
+			btnDelete.setBounds(296, 293, 124, 36);
+			btnDelete.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+
+				      int result = JOptionPane.showConfirmDialog(null, "你確認要把此二手課本/電子筆記下架嗎？");
+				      switch (result) {
+				         case JOptionPane.YES_OPTION:
+				         System.out.println("Yes");
+				         break;
+				         case JOptionPane.NO_OPTION:
+				         System.out.println("No");
+				         break;
+				         case JOptionPane.CANCEL_OPTION:
+				         System.out.println("取消");
+				         break;
+				         case JOptionPane.CLOSED_OPTION:
+				         System.out.println("Closed");
+				         break;
+			      }					
+				}
+			});
+
+			contentPane.add(btnDelete);
 		}
-	}
-	
-	public static String showResultSet(ResultSet result) throws SQLException {
-		return null;
 		
-	}
-	
-}
+		private void createTable() {
+		    tableModel = new DefaultTableModel();
+		    tableModel.addColumn("no:");
+		    tableModel.addColumn("書名");
+		    tableModel.addColumn("作者");
+		    tableModel.addColumn("價格");
+		    table = new JTable(tableModel);
+		    JScrollPane scrollPane = new JScrollPane(table);
+		    scrollPane.setBounds(10, 42, 692, 200);
+		    contentPane.add(scrollPane);
 
+		    // Adjust the size of the content pane based on the table size
+		    int tableHeight = table.getRowHeight() * table.getRowCount();
+		    int tableWidth = table.getColumnModel().getTotalColumnWidth();
+		    scrollPane.setPreferredSize(new Dimension(tableWidth, tableHeight + table.getTableHeader().getHeight()));
+		    contentPane.setPreferredSize(new Dimension(tableWidth + 430, tableHeight + table.getTableHeader().getHeight() + 360));
+		    pack();
+		}
+
+		private void showUserSBookEnote() {
+		    ArrayList<Goods> ebookData = getBooksFromDatabase();
+		    for (Goods goods : ebookData) {
+		        Object[] row = {goods.getID(), goods.getName(), goods.getAuthor(), goods.getPrice()};
+		        tableModel.addRow(row);
+		    }
+		    pack();
+		}
+
+
+		
+	        private ArrayList<Goods> getBooksFromDatabase() {
+	            ArrayList<Goods> eNote = new ArrayList<>();
+	            String server = "jdbc:mysql://140.119.19.73:3315/";
+	    		String database = "111306047"; // change to your own database
+	    		String url = server + database + "?useSSL=false";
+	    		String username = "111306047"; // change to your own username
+	    		String password = "sfe0e"; // change to your own password
+
+	            try {
+	                // 建立数据库连接
+	            	Connection connection = DriverManager.getConnection(url, username, password);
+	                // 创建查询语句
+	                String query = "SELECT * FROM Sell_Book WHERE Type = '電子筆記'";
+	                PreparedStatement statement = connection.prepareStatement(query);
+	               // statement.setString(1, bookType);
+
+	                // 执行查询并获取结果集
+	                ResultSet resultSet = statement.executeQuery();
+
+	                // 遍历结果集并添加书籍到列表
+	                while (resultSet.next()) {
+	                	int id = resultSet.getInt("ID");
+	                    String name = resultSet.getString("Name");
+	                    String author = resultSet.getString("Author");
+	                    double price = resultSet.getDouble("Price");
+	                  
+	                    Goods eNote1 = new Goods(id, name, price, author);
+	                    eNote.add(eNote1);
+	                }
+	                resultSet.close();
+	                statement.close();
+	                connection.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+
+	            return eNote;
+	}
+		
+}
