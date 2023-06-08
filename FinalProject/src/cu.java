@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class cu {
     private JFrame frame;
@@ -59,8 +60,8 @@ public class cu {
         JTextArea txtrCustomerService_1 = new JTextArea();
         txtrCustomerService_1.setBorder(new MatteBorder(1, 0, 0, 0, (Color) new Color(0, 0, 0)));
         txtrCustomerService_1.setEditable(false);
-        txtrCustomerService_1.setText("\r\n  買家常見問題：\r\n");
-        txtrCustomerService_1.setFont(new Font("MS PGothic", Font.BOLD, 14));
+        txtrCustomerService_1.setText("\r\n　買家常見問題：\r\n");
+        txtrCustomerService_1.setFont(new Font("Microsoft YaHei Light", Font.BOLD, 15));
         txtrCustomerService_1.setBackground(new Color(196, 208, 230));
         panel.add(txtrCustomerService_1);
         
@@ -81,7 +82,7 @@ public class cu {
         JTextArea txtrCustomerService = new JTextArea();
         txtrCustomerService.setEditable(false);
         txtrCustomerService.setText("\r\n　賣家常見問題：\r\n");
-        txtrCustomerService.setFont(new Font("Microsoft YaHei", Font.BOLD, 14));
+        txtrCustomerService.setFont(new Font("Microsoft YaHei Light", Font.BOLD, 15));
         txtrCustomerService.setBackground(new Color(196, 208, 230));
         panel.add(txtrCustomerService);
         
@@ -108,7 +109,20 @@ public class cu {
         textArea3.setText(" 3）上傳照片時照片被放大了怎麼辦？\r\n 答：賣家可以在自己的相冊把所需上傳的照片裁剪到 300*400 的大小，\r\n 再上傳便可。");
         panel.add(textArea3);
         
-        JLabel lblNewLabel = new JLabel("　　　如有上述未被列出的問題　歡迎寄信聯繫我們　　　president@nccu.edu.tw");
+        JTextArea textArea_1 = new JTextArea();
+        panel.add(textArea_1);
+        
+        JTextArea textArea = new JTextArea();
+        panel.add(textArea);
+        
+        JButton btnNewButton = new JButton("Home page");
+        btnNewButton.setFont(new Font("Microsoft YaHei", Font.BOLD, 12));
+        btnNewButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(133, 157, 203)));
+        btnNewButton.setBackground(new Color(255, 255, 255));
+        panel.add(btnNewButton);
+        
+        JLabel lblNewLabel = new JLabel("　　　如有上述未被列出的問題　歡迎寄信聯繫我們～　president@nccu.edu.tw");
+        lblNewLabel.setFont(new Font("PMingLiU", Font.BOLD, 12));
         lblNewLabel.setBackground(new Color(196, 208, 230));
         panel.add(lblNewLabel);
     }
