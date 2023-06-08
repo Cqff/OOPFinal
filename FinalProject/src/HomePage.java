@@ -13,6 +13,11 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class HomePage extends JFrame {
 
@@ -43,7 +48,7 @@ public class HomePage extends JFrame {
 	public HomePage() {
 		setTitle("Home Page");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 524);
+		setBounds(100, 200, 800, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -62,38 +67,10 @@ public class HomePage extends JFrame {
 		
 		JButton btnService = new JButton("客服");
 		btnService.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
-		btnService.setBounds(616, 435, 160, 40);
+		btnService.setBounds(634, 714, 160, 40);
 		contentPane.add(btnService);
 		
-		JButton btnNewBook1 = new JButton("Book_1");
-		btnNewBook1.setBounds(150, 123, 89, 99);
-		contentPane.add(btnNewBook1);
-		
-		JButton btnNewBook2 = new JButton("Book_2");
-		btnNewBook2.setBounds(350, 123, 89, 99);
-		contentPane.add(btnNewBook2);
-		
-		JButton btnNewBook3 = new JButton("Book_3");
-		btnNewBook3.setBounds(558, 123, 89, 99);
-		contentPane.add(btnNewBook3);
-		
-		JButton btnNewNote1 = new JButton("Note_1");
-		btnNewNote1.setBounds(150, 295, 89, 99);
-		contentPane.add(btnNewNote1);
-		
-		JButton btnNewNote2 = new JButton("Note_2");
-		btnNewNote2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewNote2.setBounds(350, 295, 89, 99);
-		contentPane.add(btnNewNote2);
-		
-		JButton btnNewNote3 = new JButton("Note_3");
-		btnNewNote3.setBounds(558, 295, 89, 99);
-		contentPane.add(btnNewNote3);
-		
-		JButton btnSB = new JButton("二手書：");
+		JButton btnSB = new JButton("查看更多二手書：");
 		btnSB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Second s1 = new Second();
@@ -101,10 +78,10 @@ public class HomePage extends JFrame {
 			}
 		});
 		btnSB.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
-		btnSB.setBounds(80, 79, 123, 33);
+		btnSB.setBounds(602, 92, 174, 33);
 		contentPane.add(btnSB);
 		
-		JButton btnEN = new JButton("電子筆記：");
+		JButton btnEN = new JButton("查看更多電子筆記：");
 		btnEN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Enote e1 = new Enote();
@@ -112,8 +89,95 @@ public class HomePage extends JFrame {
 			}
 		});
 		btnEN.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
-		btnEN.setBounds(80, 251, 123, 33);
+		btnEN.setBounds(620, 431, 174, 33);
 		contentPane.add(btnEN);
+		
+		JLabel Bk1 = new JLabel("New label");
+		Bk1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Buy buyPage = new Buy("1");
+				buyPage.setVisible(true);
+			}
+		});
+		Bk1.setIcon(new ImageIcon("/Users/raxhel/Desktop/Final/Bk1.jpg"));
+		Bk1.setBounds(91, 153, 135, 200);
+		contentPane.add(Bk1);
+		
+		JLabel lblNewLabel_2 = new JLabel("二手書");
+		lblNewLabel_2.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 22));
+		lblNewLabel_2.setBounds(27, 94, 67, 25);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("電子筆記");
+		lblNewLabel_2_1.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 22));
+		lblNewLabel_2_1.setBounds(27, 433, 112, 25);
+		contentPane.add(lblNewLabel_2_1);
+		
+		JLabel Bk2 = new JLabel("New label");
+		Bk2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Buy buyPage = new Buy("2");
+				buyPage.setVisible(true);
+			}
+		});
+		Bk2.setIcon(new ImageIcon("/Users/raxhel/Desktop/Final/Bk2.jpg"));
+		Bk2.setBounds(312, 153, 135, 200);
+		contentPane.add(Bk2);
+		
+		JLabel Bk3 = new JLabel("New label");
+		Bk3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Buy buyPage = new Buy("3");
+				buyPage.setVisible(true);
+			}
+		});
+		Bk3.setIcon(new ImageIcon("/Users/raxhel/Desktop/Final/Bk3.jpg"));
+		Bk3.setBounds(534, 153, 135, 200);
+		contentPane.add(Bk3);
+		
+		JLabel Enote1 = new JLabel("New label");
+		Enote1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Buy buyPage = new Buy("4");
+				buyPage.setVisible(true);
+			}
+		});
+		Enote1.setIcon(new ImageIcon("/Users/raxhel/Desktop/Final/Enote1.jpeg"));
+		Enote1.setBounds(91, 491, 135, 200);
+		contentPane.add(Enote1);
+		
+		JLabel Enote2 = new JLabel("New label");
+		Enote2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Buy buyPage = new Buy("5");
+				buyPage.setVisible(true);
+			}
+		});
+		Enote2.setIcon(new ImageIcon("/Users/raxhel/Desktop/Final/Enote2.jpeg"));
+		Enote2.setBounds(312, 491, 135, 200);
+		contentPane.add(Enote2);
+		
+		JLabel Enote3 = new JLabel("New label");
+		Enote3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Buy buyPage = new Buy("6");
+				buyPage.setVisible(true);
+			}
+		});
+		Enote3.setIcon(new ImageIcon("/Users/raxhel/Desktop/Final/Enote3.jpg"));
+		Enote3.setBounds(534, 491, 135, 200);
+		contentPane.add(Enote3);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("/Users/raxhel/Desktop/Final/icon.jpg"));
+		lblNewLabel.setBounds(325, 0, 111, 66);
+		contentPane.add(lblNewLabel);
 		
 
 		
