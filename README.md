@@ -30,6 +30,6 @@ Contact
 
 Provide your contact information so that others can reach out to you with questions, feedback, or contributions.
 
-Email: 110306036@nccu.edu.tw
-GitHub: github.com/Cqff
+- Email: 110306036@nccu.edu.tw 
+- GitHub: github.com/Cqff
 
