@@ -37,8 +37,8 @@ public class Enote extends JFrame  implements Interface{
         tableModel = new DefaultTableModel();
         tableModel.addColumn("no:");
         tableModel.addColumn("書名");
-        tableModel.addColumn("作者");
         tableModel.addColumn("價格");
+        tableModel.addColumn("作者");
         tableModel.addColumn("操作"); 
         table = new JTable(tableModel);
         add(new JScrollPane(table));
@@ -50,7 +50,7 @@ public class Enote extends JFrame  implements Interface{
 	public void show() {
         ArrayList<Goods> ebookData = getBooksFromDatabase();
         for (Goods goods : ebookData) {
-            Object[] row = {goods.getID(), goods.getName(),goods.getAuthor(), goods.getPrice()};
+            Object[] row = {goods.getID(), goods.getName(), goods.getPrice(),goods.getAuthor()};
             tableModel.addRow(row);
         }
         pack();
