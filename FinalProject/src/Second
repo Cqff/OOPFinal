@@ -21,42 +21,19 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class Second extends JFrame implements Interface{
+public class Second extends JFrame{
 	private JFrame frame;
     private JTable table;
     private DefaultTableModel tableModel;
-    private javax.swing.JButton jButton_Homepage;
 
-    
     public Second() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("二手書");
         createTable();
-        show();
-        button();
-    }
-    
-    public void button() {
-    	 jButton_Homepage = new javax.swing.JButton();
-    	 jButton_Homepage.setText("返回首頁");
-    	 jButton_Homepage.setFont(new java.awt.Font("Helvetica Neue", 0, 24));
-    	 jButton_Homepage.setBounds(10, 510, 200, 40);
-    	 jButton_Homepage.addActionListener(new java.awt.event.ActionListener() {
-    		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-    		        jButton_HomepageActionPerformed(evt);
-    		    }
-    		});
-
-    }
-    
-    private void jButton_HomepageActionPerformed(java.awt.event.ActionEvent evt) {
-        HomePage homepage = new HomePage();
-        homepage.setVisible(true);
-        this.dispose();
+        showSbooks();
     }
 
-    
-	public void createTable() {
+	private void createTable() {
         tableModel = new DefaultTableModel();
         tableModel.addColumn("no:");
         tableModel.addColumn("書名");
@@ -67,10 +44,10 @@ public class Second extends JFrame implements Interface{
         add(new JScrollPane(table));
         table.getColumn("操作").setCellRenderer(new JButtonRenderer());
         table.getColumn("操作").setCellEditor(new JButtonEditor(new JCheckBox()));
-        
+
     }
-	
-	public void show() {
+
+	private void showSbooks() {
         ArrayList<Goods> ebookData = getBooksFromDatabase();
         for (Goods goods : ebookData) {
             Object[] row = {goods.getID(), goods.getName(), goods.getPrice(),goods.getAuthor()};
@@ -79,8 +56,8 @@ public class Second extends JFrame implements Interface{
         pack();
         setVisible(true);
 	}
-	
-	 public ArrayList<Goods> getBooksFromDatabase() {
+
+	 private ArrayList<Goods> getBooksFromDatabase() {
          ArrayList<Goods> eNote = new ArrayList<>();
          String server = "jdbc:mysql://140.119.19.73:3315/";
  		String database = "111306047"; // change to your own database
@@ -105,7 +82,7 @@ public class Second extends JFrame implements Interface{
                  String name = resultSet.getString("Name");
                  String author = resultSet.getString("Author");
                  double price = resultSet.getDouble("Price");
-               
+
                  Goods eNote1 = new Goods(id, name, price, author);
                  eNote.add(eNote1);
              }
@@ -119,7 +96,7 @@ public class Second extends JFrame implements Interface{
          return eNote;
 }
 
-	
+
 	public class JButtonRenderer extends JButton implements TableCellRenderer {
 
 	    public JButtonRenderer() {
@@ -128,11 +105,11 @@ public class Second extends JFrame implements Interface{
 
 	    @Override
 	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	        setText("View"); // 按钮显示的文本
+	        setText("Buy"); // 按钮显示的文本
 	        return this;
 	    }
 	}
-	
+
 	class JButtonEditor extends AbstractCellEditor implements TableCellEditor, ActionListener {
 
 	    private JButton button;
@@ -146,7 +123,7 @@ public class Second extends JFrame implements Interface{
 	        button.addActionListener(this);
 	        button.setBorderPainted(false);
 	    }
-	    
+
 	    @Override
 	    public Object getCellEditorValue() {
 	        if ("buy".equals(button.getActionCommand())) {
@@ -162,16 +139,13 @@ public class Second extends JFrame implements Interface{
 	        id = table.getValueAt(row, 0).toString(); // 获取对应行的ID
 	        return button;
 	    }
-	    
+
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 	        button.setActionCommand("buy");
 	        fireEditingStopped();
 	    }
 	}
-	    
-} 
-        
 
-	
-       
+} 
+
