@@ -21,38 +21,17 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class Enote extends JFrame implements Interface{
+public class Enote extends JFrame  implements Interface{
 	private JFrame frame;
     private JTable table;
     private DefaultTableModel tableModel;
-    private javax.swing.JButton jButton_Homepage;
     
     public Enote() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("電子書");
         createTable();
         show();
-        button();
     }
-    public void button() {
-   	 jButton_Homepage = new javax.swing.JButton();
-   	 jButton_Homepage.setText("返回首頁");
-   	 jButton_Homepage.setFont(new java.awt.Font("Helvetica Neue", 0, 24));
-   	 jButton_Homepage.setBounds(10, 510, 200, 40);
-   	 jButton_Homepage.addActionListener(new java.awt.event.ActionListener() {
-   		    public void actionPerformed(java.awt.event.ActionEvent evt) {
-   		        jButton_HomepageActionPerformed(evt);
-   		    }
-   		});
-
-   }
-    
-    private void jButton_HomepageActionPerformed(java.awt.event.ActionEvent evt) {
-        HomePage homepage = new HomePage();
-        homepage.setVisible(true);
-        this.dispose();
-    }
-
 
 	public void createTable() {
         tableModel = new DefaultTableModel();
@@ -126,7 +105,7 @@ public class Enote extends JFrame implements Interface{
 
 	    @Override
 	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	        setText("Buy"); // 按钮显示的文本
+	        setText("View"); // 按钮显示的文本
 	        return this;
 	    }
 	}
