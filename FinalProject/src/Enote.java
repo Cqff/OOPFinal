@@ -21,19 +21,19 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class Enote extends JFrame  implements Interface{
+public class  Enote extends JFrame{
 	private JFrame frame;
     private JTable table;
     private DefaultTableModel tableModel;
-    
+
     public Enote() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setTitle("電子書");
+        setTitle("電子筆記");
         createTable();
-        show();
+        showEnote();
     }
 
-	public void createTable() {
+	private void createTable() {
         tableModel = new DefaultTableModel();
         tableModel.addColumn("no:");
         tableModel.addColumn("書名");
@@ -44,21 +44,21 @@ public class Enote extends JFrame  implements Interface{
         add(new JScrollPane(table));
         table.getColumn("操作").setCellRenderer(new JButtonRenderer());
         table.getColumn("操作").setCellEditor(new JButtonEditor(new JCheckBox()));
-        
+
     }
-	
-	public void show() {
-        ArrayList<Goods> ebookData = getBooksFromDatabase();
-        for (Goods goods : ebookData) {
+
+	private void showEnote() {
+        ArrayList<Goods> eNoteData = getEnoteFromDatabase();
+        for (Goods goods : eNoteData) {
             Object[] row = {goods.getID(), goods.getName(), goods.getPrice(),goods.getAuthor()};
             tableModel.addRow(row);
         }
         pack();
         setVisible(true);
 	}
-	
-	 public ArrayList<Goods> getBooksFromDatabase() {
-         ArrayList<Goods> eNote = new ArrayList<>();
+
+	 private ArrayList<Goods> getEnoteFromDatabase() {
+         ArrayList<Goods> note = new ArrayList<>();
          String server = "jdbc:mysql://140.119.19.73:3315/";
  		String database = "111306047"; // change to your own database
  		String url = server + database + "?useSSL=false";
@@ -82,9 +82,9 @@ public class Enote extends JFrame  implements Interface{
                  String name = resultSet.getString("Name");
                  String author = resultSet.getString("Author");
                  double price = resultSet.getDouble("Price");
-               
+
                  Goods eNote1 = new Goods(id, name, price, author);
-                 eNote.add(eNote1);
+                 note.add(eNote1);
              }
              resultSet.close();
              statement.close();
@@ -93,10 +93,10 @@ public class Enote extends JFrame  implements Interface{
              e.printStackTrace();
          }
 
-         return eNote;
+         return note;
 }
 
-	
+
 	public class JButtonRenderer extends JButton implements TableCellRenderer {
 
 	    public JButtonRenderer() {
@@ -109,7 +109,7 @@ public class Enote extends JFrame  implements Interface{
 	        return this;
 	    }
 	}
-	
+
 	class JButtonEditor extends AbstractCellEditor implements TableCellEditor, ActionListener {
 
 	    private JButton button;
@@ -123,7 +123,7 @@ public class Enote extends JFrame  implements Interface{
 	        button.addActionListener(this);
 	        button.setBorderPainted(false);
 	    }
-	    
+
 	    @Override
 	    public Object getCellEditorValue() {
 	        if ("buy".equals(button.getActionCommand())) {
@@ -139,16 +139,12 @@ public class Enote extends JFrame  implements Interface{
 	        id = table.getValueAt(row, 0).toString(); // 获取对应行的ID
 	        return button;
 	    }
-	    
+
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 	        button.setActionCommand("buy");
 	        fireEditingStopped();
 	    }
 	}
-	    
-} 
-        
 
-	
-       
+} 
