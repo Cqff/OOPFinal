@@ -21,7 +21,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-public class  Enote extends JFrame{
+public class  Enote extends JFrame implements Interface {
 	private JFrame frame;
     private JTable table;
     private DefaultTableModel tableModel;
@@ -33,7 +33,7 @@ public class  Enote extends JFrame{
         showEnote();
     }
 
-	private void createTable() {
+	public void createTable() {
         tableModel = new DefaultTableModel();
         tableModel.addColumn("no:");
         tableModel.addColumn("書名");
