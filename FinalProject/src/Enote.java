@@ -50,7 +50,7 @@ public class Enote extends JFrame  implements Interface{
 	public void show() {
         ArrayList<Goods> ebookData = getBooksFromDatabase();
         for (Goods goods : ebookData) {
-            Object[] row = {goods.getID(), goods.getName(), goods.getPrice(),goods.getAuthor()};
+            Object[] row = {goods.getID(), goods.getName(),goods.getAuthor(), goods.getPrice()};
             tableModel.addRow(row);
         }
         pack();
