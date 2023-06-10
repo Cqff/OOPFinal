@@ -50,7 +50,7 @@ public class Second extends JFrame implements Interface{
 	public void show() {
         ArrayList<Goods> secbookData = getBooksFromDatabase();
         for (Goods goods : secbookData) {
-            Object[] row = {goods.getID(), goods.getName(), goods.getPrice(),goods.getAuthor()};
+            Object[] row = {goods.getID(), goods.getName(),goods.getAuthor(),goods.getPrice()};
             tableModel.addRow(row);
         }
         pack();
@@ -105,7 +105,7 @@ public class Second extends JFrame implements Interface{
 
 	    @Override
 	    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	        setText("Buy"); // 按钮显示的文本
+	        setText("View"); // 按钮显示的文本
 	        return this;
 	    }
 	}
