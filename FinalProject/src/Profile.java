@@ -21,7 +21,8 @@ public class Profile extends JFrame {
 	private DefaultTableModel tableModel;
 	private JTable table;
 	private ArrayList<Goods> ebooksData;
-	//private HomePage homePage = new HomePage();
+	private static HomePage homePage; // = new HomePage();
+//	private Profile profile = new Profile();
 	Connection conn;
 	Statement stat;
 
@@ -47,10 +48,10 @@ public class Profile extends JFrame {
 	
 	ArrayList<Goods> sBookeNote = new ArrayList<>();
 	String server = "jdbc:mysql://140.119.19.73:3315/";
-	String database = "111306044"; // change to your own database
+	String database = "111306047"; // change to your own database
 	String url = server + database + "?useSSL=false";
-	String username = "111306044"; // change to your own username
-	String password = "6ufva"; // change to your own password
+	String username = "111306047"; // change to your own username
+	String password = "sfe0e"; // change to your own password
 	
 	public Profile() {
 		setTitle("我的主頁");
@@ -176,18 +177,30 @@ public class Profile extends JFrame {
 	    contentPane.setPreferredSize(new Dimension(tableWidth + 430, tableHeight + table.getTableHeader().getHeight() + 360));
 	}
 
+//	public static void setHomePage(HomePage page) {
+//        homePage = page;
+//    }
+	
 	private void backToHP() {
 		JButton btnBackToHP = new JButton("返回首頁");
 	    btnBackToHP.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
 	    btnBackToHP.setBounds(10, 300, 96, 23);
 	    contentPane.add(btnBackToHP);
 	    
-//	    btnBackToHP.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
+	    btnBackToHP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 //				homePage.setVisible(true);
-//				setVisible(false);
-//			}
-//		});
+////				setVisible(false);
+////				 loginPage.setVisible(true);
+//			    homePage.setLocationRelativeTo(null);
+//			    homePage.setDefaultCloseOperation(EXIT_ON_CLOSE);
+//				profile.setVisible(false);
+				homePage.setVisible(true);
+                homePage.setLocationRelativeTo(null);
+                homePage.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                dispose();
+			}
+		});
 	    
 	}
 
@@ -235,4 +248,8 @@ public class Profile extends JFrame {
 			}
 			return sBookeNote;
 	}
+
+		public void setHomePage(HomePage page) {
+			homePage = page;
+		}
 }
