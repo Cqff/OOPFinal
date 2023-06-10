@@ -25,6 +25,7 @@ public class HomePage extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JTable table_1;
+	private Profile profile = new Profile();
 
 	/**
 	 * Launch the application.
@@ -61,8 +62,16 @@ public class HomePage extends JFrame {
 		contentPane.add(btnFavorite);
 		
 		JButton btnProfile = new JButton("我的主頁");
+		btnProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.print("Loading to My Profile");
+			    profile.setVisible(true);
+			    setVisible(false);
+			}
+		});
 		btnProfile.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
 		btnProfile.setBounds(10, 11, 160, 40);
+		 profile.setHomePage(this);
 		contentPane.add(btnProfile);
 		
 		JButton btnService = new JButton("客服");
