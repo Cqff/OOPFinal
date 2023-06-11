@@ -2,12 +2,8 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -56,11 +52,11 @@ public class Register extends javax.swing.JFrame {
 		l_BG = new javax.swing.JLabel();
 
 		jLabel2.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		jLabel2.setForeground(new java.awt.Color(0, 153, 153));
+		jLabel2.setForeground(new java.awt.Color(0, 0, 0));
 		jLabel2.setText("帳號 : ");
 
 		jLabel8.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		jLabel8.setForeground(new java.awt.Color(0, 153, 153));
+		jLabel8.setForeground(new java.awt.Color(0, 0, 0));
 		jLabel8.setText("姓氏 :");
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,60 +66,60 @@ public class Register extends javax.swing.JFrame {
 		jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
 		l_uid.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		l_uid.setForeground(new java.awt.Color(0, 153, 153));
+		l_uid.setForeground(new java.awt.Color(0, 0, 0));
 		l_uid.setText("帳號 : ");
-		jPanel1.add(l_uid, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 60, -1, -1));
+		jPanel1.add(l_uid, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 60, -1, -1));
 
 		l_pass.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		l_pass.setForeground(new java.awt.Color(0, 153, 153));
+		l_pass.setForeground(new java.awt.Color(0, 0, 0));
 		l_pass.setText("密碼 : ");
-		jPanel1.add(l_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+		jPanel1.add(l_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 110, -1, -1));
 
 		l_rPass.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		l_rPass.setForeground(new java.awt.Color(0, 153, 153));
+		l_rPass.setForeground(new java.awt.Color(0, 0, 0));
 		l_rPass.setText("重新輸入 :");
 		jPanel1.add(l_rPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
 		l_fName.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		l_fName.setForeground(new java.awt.Color(0, 153, 153));
-		l_fName.setText("    名字:");
-		jPanel1.add(l_fName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+		l_fName.setForeground(new java.awt.Color(0, 0, 0));
+		l_fName.setText("名字:");
+		jPanel1.add(l_fName, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 210, -1, -1));
 
 		l_con.setFont(new java.awt.Font("KMicrosoft Yahei", 0, 18)); // NOI18N
-		l_con.setForeground(new java.awt.Color(0, 153, 153));
-		l_con.setText("      手機號碼 :");
-		jPanel1.add(l_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+		l_con.setForeground(new java.awt.Color(0, 0, 0));
+		l_con.setText("手機號碼 :");
+		jPanel1.add(l_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
 
 		l_lName.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		l_lName.setForeground(new java.awt.Color(0, 153, 153));
-		l_lName.setText("    姓氏 :");
-		jPanel1.add(l_lName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+		l_lName.setForeground(new java.awt.Color(0, 0, 0));
+		l_lName.setText("姓氏 :");
+		jPanel1.add(l_lName, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 260, -1, -1));
 
 		l_email.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		l_email.setForeground(new java.awt.Color(0, 153, 153));
+		l_email.setForeground(new java.awt.Color(0, 0, 0));
 		l_email.setText("Email: ");
-		jPanel1.add(l_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, -1, -1));
+		jPanel1.add(l_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 360, -1, -1));
 
 		l_address.setFont(new java.awt.Font("Microsoft Yahei", 0, 18)); // NOI18N
-		l_address.setForeground(new java.awt.Color(0, 153, 153));
-		l_address.setText(" 地址 :");
-		jPanel1.add(l_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
+		l_address.setForeground(new java.awt.Color(0, 0, 0));
+		l_address.setText("地址 :");
+		jPanel1.add(l_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 440, -1, -1));
 
 		pF_pass.setToolTipText("");
-		jPanel1.add(pF_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 247, 33));
+		jPanel1.add(pF_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 247, 33));
 
 		pF_rPass.setToolTipText("");
-		jPanel1.add(pF_rPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 247, 33));
-		jPanel1.add(field_uid, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 247, 35));
-		jPanel1.add(field_fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 250, 90));
-		jPanel1.add(field_ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 247, 35));
-		jPanel1.add(field_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 247, 35));
-		jPanel1.add(field_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 247, 35));
-		jPanel1.add(field_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 247, 35));
+		jPanel1.add(pF_rPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 247, 35));
+		jPanel1.add(field_uid, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 247, 35));
+		jPanel1.add(field_fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 247, 35));
+		jPanel1.add(field_ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 247, 35));
+		jPanel1.add(field_con, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 247, 35));
+		jPanel1.add(field_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 247, 35));
+		jPanel1.add(field_address, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 247, 90));
 
 		btn_submit.setBackground(new java.awt.Color(153, 204, 255));
-		btn_submit.setFont(new java.awt.Font("Kaiti TC", 1, 18)); // NOI18N
-		btn_submit.setText("Submit");
+		btn_submit.setFont(new java.awt.Font("Microsoft Yahei", 1, 18)); // NOI18N
+		btn_submit.setText("加入");
 		jPanel1.add(btn_submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 570, -1, -1));
 		btn_submit.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,8 +128,8 @@ public class Register extends javax.swing.JFrame {
 		});
 
 		btn_cancel.setBackground(new java.awt.Color(153, 204, 255));
-		btn_cancel.setFont(new java.awt.Font("Kaiti TC", 1, 18)); // NOI18N
-		btn_cancel.setText("Cancel");
+		btn_cancel.setFont(new java.awt.Font("Microsoft Yahei", 1, 18)); // NOI18N
+		btn_cancel.setText("取消");
 		jPanel1.add(btn_cancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 570, -1, -1));
 		btn_cancel.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,12 +141,12 @@ public class Register extends javax.swing.JFrame {
 		// javax.swing.ImageIcon(getClass().getResource("/finalproject/p1.jpeg"))); //
 		// NOI18N
 		try {
-			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/image/p1.jpeg"));
+			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/image/ha3.jpg"));
 			l_BG.setIcon(new ImageIcon(image));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 //		String imageUrl = "https://raw.githubusercontent.com/Cqff/OOPFinal/blob/50ee750d22ada3f6dc6d4e239ac0cf143846588d/FinalProject/image/p1.jpeg";
 //		URL url;
 //		try {
@@ -175,11 +171,7 @@ public class Register extends javax.swing.JFrame {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		
 
-		
-		
-		
 		jPanel1.add(l_BG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 640));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,11 +196,11 @@ public class Register extends javax.swing.JFrame {
 		String address = field_address.getText();
 
 		if (uid.equals("")) {
-			JOptionPane.showMessageDialog(null, "Please enter your id");
+			JOptionPane.showMessageDialog(null, "請輸入帳號");
 		} else if (pass.equals("")) {
-			JOptionPane.showMessageDialog(null, "Please enter your password");
+			JOptionPane.showMessageDialog(null, "請輸入密碼");
 		} else if (!rePass.equals(pass)) {
-			JOptionPane.showMessageDialog(null, "Please re-enter your password again");
+			JOptionPane.showMessageDialog(null, "請重輸密碼");
 		} else {
 
 			PreparedStatement ps;
