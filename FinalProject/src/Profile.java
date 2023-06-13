@@ -69,6 +69,7 @@ public class Profile extends JFrame {
 		createTable();
 		showUserSBookEnote();
 		backToHP();
+		logOut();
 		
 		try {
             conn = DriverManager.getConnection(url, username, password);
@@ -251,5 +252,28 @@ public class Profile extends JFrame {
 
 		public void setHomePage(HomePage page) {
 			homePage = page;
+		}
+	
+	private void logOut() {
+			JButton btnLogout = new JButton("登出");
+		    btnLogout.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
+		    btnLogout.setForeground(new Color(255,0,0));
+		    btnLogout.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					Login login = new Login();
+					login.setUserID("");
+					login.setVisible(true);
+					dispose();
+					
+				}
+			});
+		    btnLogout.setBounds(620, 300, 96, 23);
+		    
+		    contentPane.add(btnLogout);
+		    
+		    
 		}
 }
