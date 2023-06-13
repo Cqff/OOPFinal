@@ -254,7 +254,7 @@ public class Buy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButt_CollectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_CollectActionPerformed
-	    Collection.getBooksFromDatabase();
+   
     	}
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
