@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.*;
@@ -10,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
@@ -22,7 +24,6 @@ public class Profile extends JFrame {
 	private JTable table;
 	private ArrayList<Goods> ebooksData;
 	private static HomePage homePage; // = new HomePage();
-//	private Profile profile = new Profile();
 	Connection conn;
 	Statement stat;
 
@@ -176,11 +177,20 @@ public class Profile extends JFrame {
 	    int tableWidth = table.getColumnModel().getTotalColumnWidth();
 	    scrollPane.setPreferredSize(new Dimension(tableWidth, tableHeight + table.getTableHeader().getHeight()));
 	    contentPane.setPreferredSize(new Dimension(tableWidth + 430, tableHeight + table.getTableHeader().getHeight() + 360));
-	}
-
-//	public static void setHomePage(HomePage page) {
-//        homePage = page;
-//    }
+	}	
+	
+	public void addGoods(Goods goods) {
+        ebooksData.add(goods);
+    }
+    
+    public void updateTableModel() {
+        tableModel.setRowCount(0); // Clear the table model
+        
+        for (Goods goods : ebooksData) {
+            Object[] row = {goods.getID(), goods.getName(), goods.getAuthor(), goods.getPrice()};
+            tableModel.addRow(row);
+        }
+    }
 	
 	private void backToHP() {
 		JButton btnBackToHP = new JButton("返回首頁");
