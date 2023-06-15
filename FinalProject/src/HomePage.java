@@ -52,8 +52,9 @@ public class HomePage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				FavoriteDao fav = new FavoriteDao();
+				Login login1 = new Login();
+				FavoriteGUI f = new FavoriteGUI(fav.getFavoritesByUser(login1 .getUserID()));
 			}
 		});
 		btnFavorite.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
@@ -82,7 +83,7 @@ public class HomePage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				FAQ faq = new FAQ();
+				cu faq = new cu();
 				faq.setVisible(true);
 				dispose();
 			}
@@ -135,7 +136,7 @@ public class HomePage extends JFrame {
 				buyPage.setVisible(true);
 			}
 		});
-		Bk1.setIcon(new ImageIcon("/Users/bc/Desktop/OOPFinal/FinalProject/image/Bk1.jpg"));
+		Bk1.setIcon(new ImageIcon("/Users/raxhel/Desktop/final/Bk1.jpg"));
 		Bk1.setBounds(91, 153, 135, 200);
 		contentPane.add(Bk1);
 
@@ -157,7 +158,7 @@ public class HomePage extends JFrame {
 				buyPage.setVisible(true);
 			}
 		});
-		Bk2.setIcon(new ImageIcon("/Users/bc/Desktop/OOPFinal/FinalProject/image/Bk2.jpg"));
+		Bk2.setIcon(new ImageIcon("/Users/raxhel/Desktop/final/Bk2.jpg"));
 		Bk2.setBounds(312, 153, 135, 200);
 		contentPane.add(Bk2);
 
@@ -169,7 +170,7 @@ public class HomePage extends JFrame {
 				buyPage.setVisible(true);
 			}
 		});
-		Bk3.setIcon(new ImageIcon("/Users/bc/Desktop/OOPFinal/FinalProject/image/Bk3.jpg"));
+		Bk3.setIcon(new ImageIcon("/Users/raxhel/Desktop/final/Bk3.jpg"));
 		Bk3.setBounds(534, 153, 135, 200);
 		contentPane.add(Bk3);
 
@@ -181,7 +182,7 @@ public class HomePage extends JFrame {
 				buyPage.setVisible(true);
 			}
 		});
-		Enote1.setIcon(new ImageIcon("/Users/bc/Desktop/OOPFinal/FinalProject/image/Enote1.jpeg"));
+		Enote1.setIcon(new ImageIcon("/Users/raxhel/Desktop/final/Enote1.jpeg"));
 		Enote1.setBounds(91, 491, 135, 200);
 		contentPane.add(Enote1);
 
@@ -193,7 +194,7 @@ public class HomePage extends JFrame {
 				buyPage.setVisible(true);
 			}
 		});
-		Enote2.setIcon(new ImageIcon("/Users/bc/Desktop/OOPFinal/FinalProject/image/Enote2.jpeg"));
+		Enote2.setIcon(new ImageIcon("/Users/raxhel/Desktop/final/Enote2.jpeg"));
 		Enote2.setBounds(312, 491, 135, 200);
 		contentPane.add(Enote2);
 
@@ -205,12 +206,12 @@ public class HomePage extends JFrame {
 				buyPage.setVisible(true);
 			}
 		});
-		Enote3.setIcon(new ImageIcon("/Users/bc/Desktop/OOPFinal/FinalProject/image/Enote3.jpg"));
+		Enote3.setIcon(new ImageIcon("/Users/raxhel/Desktop/final/Enote3.jpg"));
 		Enote3.setBounds(534, 491, 135, 200);
 		contentPane.add(Enote3);
 
 		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setIcon(new ImageIcon("/Users/bc/Desktop/OOPFinal/FinalProject/image/ha5.jpg"));
+		lblNewLabel.setIcon(new ImageIcon("/Users/raxhel/Desktop/final/ha5.jpg"));
 		lblNewLabel.setBounds(0, -100, 1000, 1000);
 		contentPane.add(lblNewLabel);
 
