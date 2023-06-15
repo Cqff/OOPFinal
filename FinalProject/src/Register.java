@@ -141,7 +141,7 @@ public class Register extends javax.swing.JFrame {
 		// javax.swing.ImageIcon(getClass().getResource("/finalproject/p1.jpeg"))); //
 		// NOI18N
 		try {
-			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/image/ha3.jpg"));
+			BufferedImage image = ImageIO.read(new File("/Users/raxhel/Desktop/final/ha3.jpg"));
 			l_BG.setIcon(new ImageIcon(image));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -204,7 +204,7 @@ public class Register extends javax.swing.JFrame {
 		} else {
 
 			PreparedStatement ps;
-			String query = "INSERT INTO `reg_form`(`r_id`, `r_fname`, `r_lname`, `r_pass`, `r_con`, `r_email`, `r_address`) VALUES (?,?,?,?,?,?,?)";
+			String query = "INSERT INTO `User`(`r_id`, `r_fname`, `r_lname`, `r_pass`, `r_con`, `r_email`, `r_address`) VALUES (?,?,?,?,?,?,?)";
 
 			try {
 				ps = MySQL.connectSQL().prepareStatement(query);
