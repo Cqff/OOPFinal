@@ -17,6 +17,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.sql.DriverManager;
 
 public class Buy extends javax.swing.JFrame {
@@ -26,6 +28,8 @@ public class Buy extends javax.swing.JFrame {
 	 private ImageIcon format = null;
 	 byte[] pimage = null;
 	 private String id;
+	 Login login1 = new Login();
+	 FavoriteDao favouriteDao = new  FavoriteDao();
 
     public Buy(String id) {
     	this.id = id;
@@ -254,8 +258,11 @@ public class Buy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButt_CollectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButt_CollectActionPerformed
-   
+ 
+    	favouriteDao.addToFavorites(login1.getUserID(),Integer.parseInt(id));
+        JOptionPane.showMessageDialog(null, "書本已成功收藏！");
     	}
+    
     private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {
         this.dispose();
     }
