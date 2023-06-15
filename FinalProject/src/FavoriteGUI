@@ -1,0 +1,101 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FavoriteGUI extends JFrame {
+    private JList<Goods> favoritesList;
+    private JTable favoritesTable;
+    private DefaultTableModel tableModel;
+    private JButton cancelButton;
+
+    public FavoriteGUI(List<Goods> favorites) {
+        setTitle("收藏清單");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(600, 400);
+        
+        tableModel = new DefaultTableModel();
+        favoritesTable = new JTable(tableModel);
+        
+        tableModel.addColumn("ID");
+        tableModel.addColumn("Name");
+        tableModel.addColumn("Price");
+        tableModel.addColumn("Author");
+        
+        for (Goods goods : favorites) {
+            tableModel.addRow(new Object[]{goods.getID(), goods.getName(), goods.getPrice(), goods.getAuthor()});
+        }
+        
+     //   favoritesList = new JList<>(favorites.toArray(new Goods[0]));
+        JScrollPane scrollPane = new JScrollPane(favoritesTable);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+        
+        setVisible(true);
+        
+        cancelButton = new JButton("取消收藏");
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = favoritesTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    int bookId = (int) favoritesTable.getValueAt(selectedRow, 0);
+                    cancelFavorite(bookId);
+                    tableModel.removeRow(selectedRow);
+                }
+            }
+        });
+   
+        
+        JButton backButton = new JButton("返回");
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+      
+                dispose();  // 關閉收藏頁面
+            }
+        });
+       
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(cancelButton);
+        buttonPanel.add(backButton);
+
+        // 添加按鈕容器面板到主窗口的南部位置
+        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+    }
+    
+    
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            // 模擬從FavoriteDao中獲取收藏清單資料
+            FavoriteDao favoriteDao = new FavoriteDao();
+            Login login1 = new Login();
+            ArrayList<Goods> favorites = favoriteDao.getFavoritesByUser(login1.getUserID());
+
+            FavoriteGUI gui = new FavoriteGUI(favorites);
+            gui.setVisible(true);
+        });
+    }
+    
+    private void cancelFavorite(int bookId) {
+    	String url = "jdbc:mysql://140.119.19.73:3315/111306047?useSSL=false";
+    	String username = "111306047";
+    	String password = "sfe0e";
+    	try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String sql = "DELETE FROM Wish WHERE Book_ID = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, bookId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
