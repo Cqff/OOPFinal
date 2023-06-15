@@ -20,6 +20,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.sql.DriverManager;
 
 public class SellB extends javax.swing.JFrame {
@@ -35,6 +37,7 @@ public class SellB extends javax.swing.JFrame {
 
 	PreparedStatement ps;
 	Connection connection;
+	private Profile profile;
 	
 	public SellB(Connection connection) {
         initComponents();
@@ -405,6 +408,15 @@ public class SellB extends javax.swing.JFrame {
          
     }                                         
 
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+    
+    public void addGoodsToProfile(Goods goods) {
+        profile.addGoods(goods);
+        // Update the table model in the Profile class
+        profile.updateTableModel();
+    }
 
     private void jTextF_TimeActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
