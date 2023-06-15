@@ -78,7 +78,7 @@ public class Login extends javax.swing.JFrame {
 		jPanel1.add(jButton_Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 120, 50));
 		
 		try {
-			BufferedImage image = ImageIO.read(new File("/Users/bc/Desktop/OOPFinal/FinalProject/image/ha2.jpg"));
+			BufferedImage image = ImageIO.read(new File("/Users/raxhel/Desktop/final/ha2.jpg"));
 			//要自行更改
 			jLabel_BG.setIcon(new ImageIcon(image));
 		} catch (IOException e) {
@@ -125,7 +125,7 @@ public class Login extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(null, "請輸入你的密碼");
 		} else {
 
-			String query = "SELECT * FROM `reg_form` WHERE `r_id` = ? AND `r_pass` = ?";
+			String query = "SELECT * FROM `User` WHERE `r_id` = ? AND `r_pass` = ?";
 
 			try {
 				ps = MySQL.connectSQL().prepareStatement(query);
