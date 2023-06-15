@@ -1,0 +1,63 @@
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FavoriteDao {
+    // 資料庫連接設定
+	private String url = "jdbc:mysql://140.119.19.73:3315/111306047?useSSL=false";
+	private   String username = "111306047";
+	private   String password = "sfe0e";
+    private  List<Goods> favorites ;
+    
+    public FavoriteDao() {
+        favorites = new ArrayList<>();
+    }
+
+    // 從資料庫中獲取指定用戶的收藏清單
+    public ArrayList<Goods> getFavoritesByUser(int userId) {
+   
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             Statement stmt = conn.createStatement()) {
+
+            // 執行SQL查詢，檢索該用戶的收藏清單
+            String sql = "SELECT b.* FROM Sell_Book b " +
+                         "JOIN Wish f ON b.ID = f.Book_ID " +
+                         "WHERE f.User_ID = " + userId;
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // 將查詢結果轉換為書籍物件並添加到收藏清單
+            while (rs.next()) {
+               // Goods book = new Goods();
+              //  book.setId(rs.getInt("ID"));
+            	int id = rs.getInt("ID");
+            	 String name = rs.getString("Name");
+            	  String author = rs.getString("Author");
+                  double price = rs.getDouble("Price");
+                // 其他書籍資訊的設定
+
+                Goods bk1 = new Goods(id, name, price, author);
+                favorites.add(bk1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return (ArrayList<Goods>) favorites;
+    }
+    
+    public void addToFavorites(int userId, int bookId) {
+    	    
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            String sql = "INSERT INTO Wish (Favorite_ID,User_ID, Book_ID) VALUES (DEFAULT,?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, bookId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	
+}
