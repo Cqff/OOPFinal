@@ -23,6 +23,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.sql.DriverManager;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SellB extends javax.swing.JFrame {
 
@@ -37,13 +41,12 @@ public class SellB extends javax.swing.JFrame {
 
 	PreparedStatement ps;
 	Connection connection;
-	private Profile profile;
 	
-	public SellB(Connection connection) {
+	public SellB() {
         initComponents();
-        this.connection = connection;
+       //this.connection = connection;
     }
-
+	
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,6 +164,9 @@ public class SellB extends javax.swing.JFrame {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
             }
         });
@@ -202,6 +208,14 @@ public class SellB extends javax.swing.JFrame {
                 jTextF_AuthorActionPerformed(evt);
             }
         });
+        
+        JButton btnNewButton = new JButton("返回");
+        btnNewButton.addActionListener(new java.awt.event.ActionListener() {
+        	public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		jButt_BackActionPerformed(evt);
+        	}
+        });
+        btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1Layout.setHorizontalGroup(
@@ -229,7 +243,10 @@ public class SellB extends javax.swing.JFrame {
         							.addGap(18)
         							.addComponent(jCB_Major, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE))
         						.addComponent(jLabel_Author)
-        						.addComponent(jButt_Submit, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        							.addComponent(btnNewButton)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(jButt_Submit, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
         						.addComponent(jTextF_Author))
         					.addGap(144)
         					.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
@@ -255,11 +272,11 @@ public class SellB extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(jPanel1Layout.createSequentialGroup()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
         				.addGroup(jPanel1Layout.createSequentialGroup()
         					.addContainerGap()
         					.addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, 919, Short.MAX_VALUE))
-        				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        				.addGroup(jPanel1Layout.createSequentialGroup()
         					.addComponent(jLabel_Upload)
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(jDesktopPane1, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
@@ -303,7 +320,9 @@ public class SellB extends javax.swing.JFrame {
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(jTextF_Time, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
         			.addGap(26)
-        			.addComponent(jButt_Submit)
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(jButt_Submit)
+        				.addComponent(btnNewButton))
         			.addContainerGap(307, Short.MAX_VALUE))
         );
         
@@ -360,7 +379,16 @@ public class SellB extends javax.swing.JFrame {
         }
     }                                      
 
-    private void jButt_SubmitActionPerformed(java.awt.event.ActionEvent evt) throws IOException {                                             
+    private void jButt_SubmitActionPerformed(java.awt.event.ActionEvent evt) throws IOException, SQLException {  
+    	  
+      	String server = "jdbc:mysql://140.119.19.73:3315/";
+  		String database = "111306047"; // change to your own database
+  		String url = server + database + "?useSSL=false";
+  		String username = "111306047"; // change to your own username
+  		String password = "sfe0e"; // change to your own password
+  		
+  		Connection conn = DriverManager.getConnection(url, username, password);
+  	
             // Get the user information from input fields or variables
             String name = jTextF_Name.getText();
             double price = Double.parseDouble(jTextF_Price.getText());
@@ -381,7 +409,7 @@ public class SellB extends javax.swing.JFrame {
             String query = "INSERT INTO Sell_Book (ID,UserID,Name,Price, Type,Category,Author,Situation,View,Time,img,img_path) VALUES (DEFAULT, ?, ?,?,?,?,?,?,?,?,?,?)";
             try {
             	InputStream is = new FileInputStream(f);
-            	PreparedStatement ps = connection.prepareStatement(query);
+            	PreparedStatement ps = conn.prepareStatement(query);
             	 ps.setInt(1, login1.getUserID());
                  ps.setString(2, name);
                  ps.setDouble(3, price);
@@ -408,16 +436,10 @@ public class SellB extends javax.swing.JFrame {
          
     }                                         
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    private void jButt_BackActionPerformed(java.awt.event.ActionEvent evt) {
+        this.dispose();
     }
     
-    public void addGoodsToProfile(Goods goods) {
-        profile.addGoods(goods);
-        // Update the table model in the Profile class
-        profile.updateTableModel();
-    }
-
     private void jTextF_TimeActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
     }                                           
@@ -438,51 +460,10 @@ public class SellB extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-    	String server = "jdbc:mysql://140.119.19.73:3315/";
-		String database = "111306047"; // change to your own database
-		String url = server + database + "?useSSL=false";
-		String username = "111306047"; // change to your own username
-		String password = "sfe0e"; // change to your own password
-        //</editor-fold>
-
-        /* Create and display the form */
-		try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SellB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SellB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SellB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SellB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-		try {
-			Connection conn = DriverManager.getConnection(url, username, password);
-			System.out.println("DB Connectd");
-			 java.awt.EventQueue.invokeLater(new Runnable() {
-		            public void run() {
-		                new SellB(conn).setVisible(true);
-		            }
-		        });
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+   
 		
         
-    }
+    
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButt_Submit;
     private javax.swing.JButton jButt_Upload;
