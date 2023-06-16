@@ -13,8 +13,6 @@ Table of Contents
 Installation
 
 $ git clone https://github.com/Cqff/OOPFinal.git
-$ cd OOPFinal
-$ mvn install
 
 Usage
 
