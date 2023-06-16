@@ -18,6 +18,8 @@ import java.awt.event.MouseEvent;
 public class HomePage extends JFrame {
 
 	private JPanel contentPane;
+	Login login1;
+	private int loggedInUserID;
 	/**
 	 * Launch the application.
 	 */
@@ -53,7 +55,7 @@ public class HomePage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				FavoriteDao fav = new FavoriteDao();
-				Login login1 = new Login();
+				//Login login1 = new Login();
 				FavoriteGUI f = new FavoriteGUI(fav.getFavoritesByUser(login1 .getUserID()));
 			}
 		});
@@ -67,9 +69,11 @@ public class HomePage extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Profile profile = new Profile();
-				profile.setVisible(true);
-				dispose();
+				 MyProfile p = new MyProfile(login1 .getUserID());
+//				Profile profile = new Profile(login1.getUserID(),HomePage.this);
+				//p.setVisible(true);
+				
+				
 			}
 		});
 		btnProfile.setFont(new Font("Microsoft YaHei", Font.PLAIN, 18));
@@ -216,4 +220,5 @@ public class HomePage extends JFrame {
 		contentPane.add(lblNewLabel);
 
 	}
+	
 }
