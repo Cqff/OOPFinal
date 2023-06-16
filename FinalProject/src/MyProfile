@@ -1,0 +1,195 @@
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+public class MyProfile extends JFrame {
+	private JPanel contentPane;
+	private JTextField tfID;
+    private DefaultTableModel tableBooks;
+    private JTable myTable;
+    private int userID;
+    PreparedStatement ps;
+    ResultSet rs;
+    DefaultTableModel model;
+    String url = "jdbc:mysql://140.119.19.73:3315/111306047?useSSL=false";
+    String username = "111306047";
+    String password = "sfe0e";
+
+    public MyProfile(int userID) {
+        this.userID = userID;
+        setTitle("我的主頁");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(600, 400);
+        
+        setBounds(100, 100, 725, 397);
+		contentPane = new JPanel();
+		contentPane.setSize(1000, 500);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		createDeleteFunction();
+        tableBooks = new DefaultTableModel();
+        myTable = new JTable(tableBooks);
+
+        tableBooks.addColumn("ID");
+        tableBooks.addColumn("Name");
+        tableBooks.addColumn("Price");
+        tableBooks.addColumn("Author");
+
+        JScrollPane scrollPane = new JScrollPane(myTable);
+        scrollPane.setBounds(10, 41, 689, 214);
+        contentPane.add(scrollPane);
+
+        displayBooks(userID);
+        
+        JButton btnBack = new JButton("返回");
+        btnBack.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
+        btnBack.setBounds(10, 293, 124, 36);
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // 關閉當前頁面
+            }
+        });
+        contentPane.add(btnBack);
+        
+        setVisible(true);
+        
+    }
+    
+    private void deleteBookFromTable(int bookID) {
+	    int rowCount = tableBooks.getRowCount();
+	    for (int i = 0; i < rowCount; i++) {
+	        int id = (int) tableBooks.getValueAt(i, 0);
+	        if (id == bookID) {
+	        	tableBooks.removeRow(i);
+	            break;
+	        }
+	    }
+	}
+
+
+    public void createDeleteFunction() {
+    	JLabel lbID = new JLabel("ID:");
+		lbID.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lbID.setBounds(296, 268, 49, 14);
+		contentPane.add(lbID);
+		
+		tfID = new JTextField();
+		tfID.setBounds(324, 265, 96, 20);
+		contentPane.add(tfID);
+		tfID.setColumns(10);
+		
+		JLabel lbNewLabel = new JLabel("你上架的二手課本和電子筆記：");
+		lbNewLabel.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
+		lbNewLabel.setBounds(10, 11, 215, 20);
+		contentPane.add(lbNewLabel);
+       
+    	JButton btnDelete = new JButton("下架");
+        btnDelete.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
+        btnDelete.setBounds(296, 293, 124, 36);
+        btnDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int result = JOptionPane.showConfirmDialog(null, "你確認要把此二手課本/電子筆記下架嗎？");
+                switch (result) {
+                    case JOptionPane.YES_OPTION:
+                        String ID = tfID.getText();
+                     // 檢查該書籍是否屬於當前用戶
+                        if (checkBookOwnership(Integer.parseInt(ID))) {
+                            String query = "DELETE FROM Sell_Book WHERE ID=?";
+                            try {
+                                Connection conn = DriverManager.getConnection(url, username, password);
+                                PreparedStatement statement = conn.prepareStatement(query);
+                                statement.setString(1, ID);
+                                int rowsAffected = statement.executeUpdate();
+                                if (rowsAffected > 0) {
+                                    JOptionPane.showMessageDialog(null, "你已成功下架");
+                                    // Delete the book from the table
+                                    deleteBookFromTable(Integer.parseInt(ID));
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "沒有相關資料", "提醒", JOptionPane.WARNING_MESSAGE);
+                                }
+                                statement.close();
+                            } catch (SQLException e1) {
+                                e1.printStackTrace();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "這本書籍不屬於你上傳的", "提醒", JOptionPane.WARNING_MESSAGE);
+                        }
+                        break;
+                    case JOptionPane.NO_OPTION:
+                        System.out.println("No");
+                        break;
+                    case JOptionPane.CANCEL_OPTION:
+                        System.out.println("取消");
+                        break;
+                    case JOptionPane.CLOSED_OPTION:
+                        System.out.println("Closed");
+                        break;
+                }
+            }
+        });
+        contentPane.add(btnDelete);
+    }
+    private void displayBooks(int userID) {
+        model = (DefaultTableModel) myTable.getModel();
+        model.setRowCount(0); // 清空表格中的舊資料
+
+        String query = "SELECT * FROM `Sell_Book` WHERE `UserID` = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+        	PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, userID);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int bookID = rs.getInt("ID");
+                String bookTitle = rs.getString("Name");
+                double bookPrice = rs.getDouble("Price");
+                String bookAuthor = rs.getString("Author");
+
+                model.addRow(new Object[] { bookID, bookTitle, bookPrice, bookAuthor });
+            }
+
+            myTable.setModel(model);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+      
+    }
+
+    private boolean checkBookOwnership(int bookID) {
+        String query = "SELECT * FROM `Sell_Book` WHERE `ID` = ? AND `UserID` = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, bookID);
+            ps.setInt(2, userID);
+            ResultSet rs = ps.executeQuery();
+            return rs.next(); // 如果結果集中有數據，則表示該書籍屬於當前用戶，返回true；否則返回false。
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    
+
+}
